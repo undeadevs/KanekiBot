@@ -36,9 +36,16 @@ bot.on('guildMemberAdd', function(member){
 
     //this is for my server
     if(bot.isOwner(member)){
-        //let or = member.guild.roles.find("name", "owner");
+        let or = member.guild.roles.find("name", "owner");
         let gc = member.guild.channels.find("name", "general");
-        //member.addRole(or);
+        if(!or){
+            return member.guild.createRole({
+                name: "owner",
+                color: "ff0000",
+                permissions: []
+            }).then(function(role){message.say(`${role} role has been added.`)});
+        }
+        member.addRole(or);
         gc.send('Welcome to the Server my owner!!!');
     }else if(!bot.isOwner(member)){
         let mr = member.guild.roles.find("name", "Member");
