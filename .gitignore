@@ -1,2 +1,2 @@
-node-modules
+dir_to_ignore/node-modules
 config.json
