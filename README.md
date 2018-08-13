@@ -4,4 +4,3 @@
 
 **Start the bot**
 `node index`
-# KanekiBot
