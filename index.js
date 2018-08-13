@@ -4,8 +4,8 @@ const config = require("./config.json");
 const bot = new Commando.Client({owner: [config.ownerID, config.adminID], commandPrefix: 'c/'});
 const TOKEN = config.token;
 
-//clientID 466150384314875905
-//inviteLink https://discordapp.com/oauth2/authorize?client_id=466150384314875905&scope=bot&permissions=2146958847
+//clientID 478376842248716291
+//inviteLink https://discordapp.com/oauth2/authorize?client_id=478376842248716291&scope=bot&permissions=2146958847
 /*yeee.rd_#4819
 Dukfiz#0756
 raffie#5923*/
