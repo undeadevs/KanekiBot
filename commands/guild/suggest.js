@@ -18,6 +18,7 @@ class suggestCommand extends commando.Command
     {
         if(!args) return message.channel.sendMessage(`Please suggest something.`);
         var sc = message.member.guild.channels.find("name", "suggestions");
+        if(!sc) return;
         sc.sendMessage(`*${message.author} suggested ${args}*`);
         console.log(`@${message.author.tag} suggested ${args}`);
     }

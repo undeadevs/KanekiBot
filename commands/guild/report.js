@@ -34,14 +34,9 @@ class reportCommand extends commando.Command
         var rEmbed = new discord.RichEmbed()
             .setDescription(`__***--${args.user} has been reported--***__ \n**REPORTER:** ${message.author} \n**TIME**: ${message.createdAt} \n**REASON**: ${args.reason} \n**-------------------------------------**`)
 
-        var sc = message.member.guild.channels.find("name", "report");
-        var mtc = message.member.guild.categories.find("name", "mod-text channel");
-        if(!sc){
-            return mtc.createChannel(message.author.username,{
-                name: "report",
-                private: true
-            }).then(function(channel){message.say(`${channel} channel has been added.`)});
-        }
+        var rc = message.member.guild.channels.find("name", "report");
+        //var mtc = message.member.guild.categories.find("name", "mod-text channel");
+        if(!rc) return;
         //await sc.sendMessage(`--${args.user} has been reported-- \nREPORTER: ${message.author} \nTIME: ${message.createdAt} \nREASON: ${args.reason}`);
         await sc.sendMessage(rEmbed);
     }

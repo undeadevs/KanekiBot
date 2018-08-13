@@ -30,6 +30,7 @@ global.servers = {};
 
 bot.msgs = require("./msgs.json");
 
+try {
 bot.on('guildMemberAdd', function(member){
     //DYas = member.guilds.find("name", "DYas");
     //tst = member.guilds.find("name", "tst");
@@ -37,29 +38,21 @@ bot.on('guildMemberAdd', function(member){
     //this is for my server
     if(bot.isOwner(member)){
         let or = member.guild.roles.find("name", "owner");
-        let gc = member.guild.channels.find("name", "general");
+        let gc = member.guild.channels.find("name", "lobby");
         if(!or){
-            return member.guild.createRole({
-                name: "owner",
-                color: "ff0000",
-                permissions: []
-            }).then(function(role){message.say(`${role} role has been added.`)});
+            return gc.send(['Welcome to the Server ' + member, rules]);
         }
         member.addRole(or);
         gc.send('Welcome to the Server my owner!!!');
     }else if(!bot.isOwner(member)){
-        let mr = member.guild.roles.find("name", "Member");
+        let mr = member.guild.roles.find("name", "trash");
+        let gc = member.guild.channels.find("name", "lobby");
         if(!mr){
-            return member.guild.createRole({
-                name: "Member",
-                color: "8cf9ff",
-                permissions: []
-            }).then(function(role){message.say(`${role} role has been added.`)});
+            return gc.send(['Welcome to the Server ' + member, rules]);
         }
         member.addRole(mr);
-        member.send('Welcome to the Server ' + member);
         let rules = "RULES : \n-do not insult anyone.";
-        member.send( rules );
+        gc.send(['Welcome to the Server ' + member, rules]);
 
     }
     //end
@@ -67,6 +60,8 @@ bot.on('guildMemberAdd', function(member){
     //member.send('Welcome to the Server ' + member);
 
 });
+}
+catch(error){}
 
 bot.on('messageUpdate', function(newMessage, oldMessage){
 });
