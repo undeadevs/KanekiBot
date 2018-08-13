@@ -35,8 +35,9 @@ class reportCommand extends commando.Command
             .setDescription(`__***--${args.user} has been reported--***__ \n**REPORTER:** ${message.author} \n**TIME**: ${message.createdAt} \n**REASON**: ${args.reason} \n**-------------------------------------**`)
 
         var sc = message.member.guild.channels.find("name", "report");
+        var mtc = message.member.guild.categories.find("name", "mod-text channel");
         if(!sc){
-            return member.guild.createChannel({
+            return mtc.createChannel(message.author.username,{
                 name: "report",
                 private: true
             }).then(function(channel){message.say(`${channel} channel has been added.`)});
