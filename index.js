@@ -1,14 +1,8 @@
 const Commando = require('discord.js-commando');
 const fs = require('fs');
-<<<<<<< HEAD
 const config = require("./config.json");
 const bot = new Commando.Client({owner: [config.ownerID, config.adminID], commandPrefix: 'c/'});
 const TOKEN = config.token;
-=======
-const bot = new Commando.Client({owner: ['341110157117227009', /*'459702418217893888',*/ '292554346393108481'], commandPrefix: 'c/'});
-const TOKEN = 'TOKEN';
-//const TS = 'MzQxMTEwMTU3MTE3MjI3MDA5.Dc_wbg.8fwJhR232lliTPNH7glx_hzaI_c';//for selfbot
->>>>>>> e95e9410d31a7d8aa3b26d0e6c4344eaf1284c63
 
 //clientID 466150384314875905
 //inviteLink https://discordapp.com/oauth2/authorize?client_id=466150384314875905&scope=bot&permissions=2146958847
