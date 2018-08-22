@@ -6,9 +6,6 @@ const TOKEN = config.token;
 
 //clientID 478376842248716291
 //inviteLink https://discordapp.com/oauth2/authorize?client_id=478376842248716291&scope=bot&permissions=2146958847
-/*yeee.rd_#4819
-Dukfiz#0756
-raffie#5923*/
 
 bot.registry.registerDefaultTypes();
 bot.registry.registerGroup('random', 'Random');
@@ -37,8 +34,8 @@ bot.on('guildMemberAdd', function(member){
 
     //this is for my server
     if(bot.isOwner(member)){
-        let or = member.guild.roles.find("name", "owner");
-        let gc = member.guild.channels.find("name", "lobby");
+        let or = member.guild.roles.find("name", "admin");
+        let gc = member.guild.channels.find("name", "🚪lobby");
         if(!or){
             return gc.send(['Welcome to the Server ' + member, rules]);
         }
@@ -46,7 +43,7 @@ bot.on('guildMemberAdd', function(member){
         gc.send('Welcome to the Server my owner!!!');
     }else if(!bot.isOwner(member)){
         let mr = member.guild.roles.find("name", "trash");
-        let gc = member.guild.channels.find("name", "lobby");
+        let gc = member.guild.channels.find("name", "🚪lobby");
         if(!mr){
             return gc.send(['Welcome to the Server ' + member, rules]);
         }

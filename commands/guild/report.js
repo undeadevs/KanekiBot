@@ -38,7 +38,7 @@ class reportCommand extends commando.Command
         //var mtc = message.member.guild.categories.find("name", "mod-text channel");
         if(!rc) return;
         //await sc.sendMessage(`--${args.user} has been reported-- \nREPORTER: ${message.author} \nTIME: ${message.createdAt} \nREASON: ${args.reason}`);
-        await sc.sendMessage(rEmbed);
+        await rc.sendMessage(rEmbed);
     }
 
 }
