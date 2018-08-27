@@ -8,14 +8,20 @@ class kerangAjaib extends commando.Command
             name: 'apakah',
             group: 'random',
             memberName: 'apakah',
-            description: 'Kerang Ajaib dari Spongebob.'
+            description: 'Kerang Ajaib dari Spongebob.',
+            args: [
+                {
+                    key: 'pertanyaan',
+                    prompt:'apakah apaan woy!',
+                    type: 'string'
+                }
+            ]
         });
     }
 
-    async run(message, args)
+    async run(message, { pertanyaan })
     {
-        if(!args) return message.channel.sendMessage("apakah apaan woy!")
-        if(args == "saya ganteng?" | args == "saya ganteng")
+        if(pertanyaan == "saya ganteng?" | args.pertanyaan == "saya ganteng")
         {
             message.channel.sendMessage("N G A R E P");
         }

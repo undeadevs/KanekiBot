@@ -9,43 +9,49 @@ class tickleCommand extends commando.Command
             group: 'random',
             memberName: 'tickle',
             description: 'Tickles a user.',
-            guildOnly: true
+            guildOnly: true,
+            args: [
+                {
+                    key: 'user',
+                    label:'user',
+                    prompt:'Please provide the user that you want to tickle.',
+                    type: 'user'
+                }
+            ]
         });
     }
 
-    async run(message, args)
+    async run(message, { user })
     {
-        var mention = message.mentions.users.first();
         var chance = Math.floor(Math.random() * 5);
-        if(!args) return message.channel.sendMessage(`Please provide a mention of the user that you want to tickle.`);
-        if(args == mention)
+        if(user)
         {
 
             if(chance == 0)
             {
-            message.channel.sendMessage('tickled ' + mention, {files: ["./pics/tickled0.gif"]});
+            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled0.gif"]});
             }
 
             if(chance == 1)
             {
-            message.channel.sendMessage('tickled ' + mention, {files: ["./pics/tickled1.gif"]});
+            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled1.gif"]});
             }
 
             if(chance == 2)
             {
-            message.channel.sendMessage('tickled ' + mention, {files: ["./pics/tickled2.gif"]});
+            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled2.gif"]});
             }
 
             if(chance == 3)
             {
-            message.channel.sendMessage('tickled ' + mention, {files: ["./pics/tickled3.gif"]});
+            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled3.gif"]});
             }
 
             if(chance == 4)
             {
-            message.channel.sendMessage('tickled ' + mention, {files: ["./pics/tickled4.gif"]});
+            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled4.gif"]});
             }
-        }else{message.channel.sendMessage(`${args} isn't a user.`);}
+        }else{message.channel.sendMessage(`${user} isn't a user.`);}
     }
 }
 

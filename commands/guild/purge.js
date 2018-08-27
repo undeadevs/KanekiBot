@@ -10,6 +10,7 @@ class purgeCommand extends commando.Command
             group: 'guild',
             memberName: 'purge',
             description: 'Deletes message.',
+            guildOnly: true,
             args: [
                 {
                     key: 'number',
@@ -20,11 +21,12 @@ class purgeCommand extends commando.Command
         });
     }
 
-    async run(message, args)
+    async run(message, { number })
     {
-        if(!args) return;
-        message.channel.bulkDelete(args.number);
-        await message.channel.sendMessage(`Deleted ${args.number} messages.`);}
+        if(number>100) return message.channel.sendMessage("You can't delete messages more than 100.");
+        message.channel.bulkDelete(number);
+        await message.channel.sendMessage(`Deleted ${number} messages.`);
+    }
 
 }
 

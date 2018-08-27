@@ -9,15 +9,20 @@ class stealPPCommand extends commando.Command
             name: 'stealpp',
             group: 'random',
             memberName: 'stealpp',
-            description: 'Steals someone Profile Pic.'
+            description: 'Steals someone Profile Pic.',
+            args: [
+                {
+                    key: 'user',
+                    prompt:'Please provide a mention of the user.',
+                    type: 'user'
+                }
+            ]
         });
     }
 
-    async run(message, args)
+    async run(message, { user })
     {
-        var mention = message.mentions.users.first();
-        if(!args) return message.channel.sendMessage(`Please provide a mention of the user.`);
-        if(args == mention) message.channel.sendMessage(mention.avatarURL); else message.channel.sendMessage(`${args} isn't a user.`);
+        if(user) message.channel.sendMessage(user.avatarURL); else message.channel.sendMessage(`${user} isn't a user.`);
     }
 }
 

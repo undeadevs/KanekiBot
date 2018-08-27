@@ -9,14 +9,20 @@ class sayCommand extends commando.Command
             name: 'say',
             group: 'random',
             memberName: 'say',
-            description: 'Commands the bot to says something.'
+            description: 'Commands the bot to says something.',
+            args: [
+                {
+                    key: 'text',
+                    prompt:'Please add something you want the bot to say.',
+                    type: 'string'
+                }
+            ]
         });
     }
 
-    async run(message, args)
+    async run(message, { text })
     {
-        if(!args) return message.channel.sendMessage("Please add something you want to say as an argument.");
-        message.channel.sendMessage(args);
+        message.channel.sendMessage(text);
     }
 
 }

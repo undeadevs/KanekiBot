@@ -26,13 +26,13 @@ class reportCommand extends commando.Command
         });
     }
 
-    async run(message, args)
+    async run(message, { user, reason })
     {
 
         if(!args) return;
 
         var rEmbed = new discord.RichEmbed()
-            .setDescription(`__***--${args.user} has been reported--***__ \n**REPORTER:** ${message.author} \n**TIME**: ${message.createdAt} \n**REASON**: ${args.reason} \n**-------------------------------------**`)
+            .setDescription(`__***--${user} has been reported--***__ \n**REPORTER:** ${message.author} \n**TIME**: ${message.createdAt} \n**REASON**: ${reason} \n**-------------------------------------**`)
 
         var rc = message.member.guild.channels.find("name", "report");
         //var mtc = message.member.guild.categories.find("name", "mod-text channel");

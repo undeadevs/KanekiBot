@@ -1,8 +1,12 @@
 const Commando = require('discord.js-commando');
 const fs = require('fs');
-const config = require("./config.json");
-const bot = new Commando.Client({owner: [config.ownerID, config.adminID], commandPrefix: 'c/'});
-const TOKEN = config.token;
+const {token, ownerID, adminID, prefix, googleapikey} = require("./config.json");
+const bot = new Commando.Client({owner: [ownerID, adminID], commandPrefix: prefix});
+
+const ytdl = require('ytdl-core');
+const yt = require('simple-youtube-api');
+
+const youtube = new yt(googleapikey);
 
 //clientID 478376842248716291
 //inviteLink https://discordapp.com/oauth2/authorize?client_id=478376842248716291&scope=bot&permissions=2146958847
@@ -12,8 +16,10 @@ bot.registry.registerGroup('random', 'Random');
 bot.registry.registerGroup('music', 'Music');
 bot.registry.registerGroup('math', 'Math');
 bot.registry.registerGroup('guild', 'Guild');
+bot.registry.registerGroup('analyze', 'Analyze');
+bot.registry.registerGroup('search', 'Search');
 bot.registry.registerDefaultGroups();
-bot.registry.registerDefaultCommands();
+bot.registry.registerDefaultCommands({ help:false, prefix:false, eval:false, ping:false});
 bot.registry.registerCommandsIn(__dirname + '/commands');
 
 bot.on('ready',function(){
@@ -22,8 +28,7 @@ bot.on('ready',function(){
     bot.user.setActivity('Unravel', {type: 'LISTENING'});
 });
 
-global.currentTeamMembers = [];
-global.servers = {};
+global.queue = {};
 
 bot.msgs = require("./msgs.json");
 
@@ -78,6 +83,7 @@ bot.on('message', function(message){
     if(msg == "hello" | msg == "hi" | msg == "hey"){
 
         message.channel.sendMessage('Hello ' + message.author + ',how are you?');
+
     }
 
     if(msg == "dasar wibu" | msg == "wibu lo"){
@@ -88,4 +94,4 @@ bot.on('message', function(message){
 
 });
 
-bot.login(TOKEN);
+bot.login(token);

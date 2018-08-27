@@ -10,17 +10,25 @@ class suggestCommand extends commando.Command
             group: 'guild',
             memberName: 'suggest',
             description: 'Commands the bot to says something',
-            guildOnly: true
+            guildOnly: true,
+            args: [
+                {
+                    key: 'suggestion',
+                    prompt:'Please suggest something.',
+                    type: 'string'
+                }
+            ]
         });
     }
 
     async run(message, args)
     {
-        if(!args) return message.channel.sendMessage(`Please suggest something.`);
+        var suggestion = args.suggestion;
+        if(!args) return;
         var sc = message.member.guild.channels.find("name", "suggestions");
         if(!sc) return;
-        sc.sendMessage(`*${message.author} suggested ${args}*`);
-        console.log(`@${message.author.tag} suggested ${args}`);
+        sc.sendMessage(`*${message.author} suggested ${suggestion}*`);
+        console.log(`@${message.author.tag} suggested ${suggestion}`);
     }
 
 }

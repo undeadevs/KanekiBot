@@ -49,7 +49,8 @@ bot.on('message', function(message){
         if(mention == null){message.delete(2000); message.channel.sendMessage("Please put an invalid user.").then(function(mmsg){mmsg.delete(2000);});}else{
         am = args.slice(2).join(" ");
         message.delete(2000);
-        if(!args[1]) return message.channel.sendMessage("Please provide how many do you want to spam the user (spamlimit: 5).").then(function(mmsg){mmsg.delete(2000);});
+        if(!args[1]) return message.channel.sendMessage("Please provide how many do you want to spam the user for the second arguments (spamlimit: 5).").then(function(mmsg){mmsg.delete(2000);});
+        if(!args[2]) return message.channel.sendMessage("Please provide what message do you wanna spam them for the third arguments.").then(function(mmsg){mmsg.delete(2000);});
         if(args[1]=="2"){
             mention.send(am);
             mention.send(am);

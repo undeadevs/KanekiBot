@@ -28,10 +28,10 @@ class divideMathCommand extends commando.Command
         });
     }
 
-    async run(message, args)
+    async run(message, { number1, number2 })
     {
-        var result = args.number1/args.number2;
-        message.channel.sendMessage(args.number1 + " : " + args.number2 + " = " + result);
+        var result = number1/number2;
+        message.channel.sendMessage(number1 + " : " + number2 + " = " + result);
     }
 }
 

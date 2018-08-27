@@ -1,0 +1,88 @@
+const commando = require('discord.js-commando');
+var fs = require('fs');
+var ytdl = require('ytdl-core');
+
+const queue_ = new Map();
+
+function Play(connection, message, url)
+{
+
+    var server = servers[message.guild.id];
+    server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: 'audioonly'}));
+    server.queue.shift();
+    server.dispatcher.on('end', function()
+    {
+
+        if(server.queue[0])
+        {
+            Play(connection, message);
+        }
+        else
+        {
+            connection.disconnect();
+        }
+
+    });
+
+}
+
+class playCommand extends commando.Command
+{
+    constructor(client)
+    {
+        super(client,{
+            name: 'play',
+            group: 'music',
+            memberName: 'play',
+            description: 'Plays music.',
+            guildOnly: true,
+            args: [
+                {
+                    key: 'url',
+                    label:'url',
+                    prompt:'Please provide an invalid link.',
+                    type: 'string'
+                }
+            ]
+        });
+    }
+
+    async run(message, { url })
+    {
+
+        const serverQueue = queue_.get(message.guild.id);
+
+        if(!serverQueue){
+            queueConstruct = {
+                textChannel: message.channel,
+                voiceChannel: voiceChannel,
+                connection: null,
+                songs: [],
+                volume: 5,
+                playing: true
+            };
+            queue_.set(message.guild.id, queueConstruct);
+        }
+
+        var server = servers[message.guild.id];
+        if(!message.member.voiceChannel)
+        {
+            message.reply("You need to join a voice channel.");
+        }
+
+        if(!servers[message.guild.id]){servers[message.guild.id] = {
+            queue: []
+        };
+        }
+
+        server.queue.push(url);
+
+        if(!message.guild.voiceConnection){message.member.voiceChannel.join().then(function(connection){
+            Play(connection, message, url);
+        });}
+
+    }
+
+}
+
+module.exports = playCommand;
