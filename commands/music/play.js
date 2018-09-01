@@ -80,7 +80,7 @@ class playCommand extends commando.Command
             play(message.guild.voiceConnection, queue[message.guild.id].songs.shift());
         });}
 
-		function play(connection, song) {
+		async function play(connection, song) {
             console.log(song);
 
 			if (song === undefined) return message.channel.sendMessage('Queue finished.').then(() => {
@@ -94,11 +94,11 @@ class playCommand extends commando.Command
             .setImage(song.img)
             .setFooter(`requested by: ${song.requester}`, message.author.avatarURL);
             message.channel.sendEmbed(sSEmbed);
+
+            ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
             
-            queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly'}));
+            queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly', quality: 'highestaudio'}));
             
-            //queue[message.guild.id].songs.shift();
-			
 			queue[message.guild.id].dispatcher.on('end', () => {
                 play(connection, queue[message.guild.id].songs.shift());
             });

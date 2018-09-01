@@ -23,9 +23,12 @@ bot.registry.registerDefaultCommands({ help:false, prefix:false, eval:false, pin
 bot.registry.registerCommandsIn(__dirname + '/commands');
 
 bot.on('ready',function(){
-    console.log("Login Success");
+    /*console.log("Login Success");
 
-    bot.user.setActivity('Unravel', {type: 'LISTENING'});
+    bot.user.setActivity('Unravel', {type: 'LISTENING'});*/
+    let stats = [`${bot.guilds.size} Servers | ${prefix}help`, 'Unravel']
+    console.log(`[Bot is online | Node: ${process.version} | Discord.js-Commando: v${Commando.version}]\nConnected as: ${bot.user.username} (ID: ${bot.user.id})\nGuilds Connected: ${bot.guilds.size}`);
+    bot.user.setActivity(`${bot.guilds.size} Servers | ${prefix}help`, {type: 'WATCHING'});
 });
 
 global.queue = {};
@@ -65,9 +68,6 @@ bot.on('guildMemberAdd', function(member){
 }
 catch(error){}
 
-bot.on('messageUpdate', function(newMessage, oldMessage){
-});
-
 const sc = require("./sc");
 
 bot.on('message', function(message){
@@ -75,11 +75,7 @@ bot.on('message', function(message){
     msg = message.content.toLowerCase();
     
     if(message.author.bot) return;
-    /*if(msg == "tickle " + mention){
-        message.channel.sendMessage('tickled ' + mention, {files: [__dirname + "/pics/tickled0.gif"]});
 
-    }*/
-    
     if(msg == "hello" | msg == "hi" | msg == "hey"){
 
         message.channel.sendMessage('Hello ' + message.author + ',how are you?');

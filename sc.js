@@ -27,16 +27,17 @@ bot.on('message', function(message){
             .setColor("0xBF4C4C")
             .addField(`__**SPECIAL COMMANDS**__`, `**prefix:** $`, true)
             .addField(`**DM**`, `**Desc:** \`Dms user using bot.\` \n**Usage:** \`$dm <user> <messages>\``, false)
-            .addField(`**SPAM**`, `**Desc:** \`Spams user.\` \n**Usage:** \`$spam <user> <amount> <messages>\` \`spamlimit: 5\``, false)
+            .addField(`**SPAM**`, `**Desc:** \`Spams user.\` \n**Usage:** \`$spam <user> <amount> <messages>\``, false);
         if(message.channel.type=="dm") return message.author.send(hEmbed);
-        message.reply("Sent you a DM with information.");
+        message.reply(`Sent you a DM with information.`);
         message.member.send(hEmbed);
         }
     }
     
     if(command === 'dm') {
         if(!bot.isOwner(message.author)){message.delete(2000); message.channel.sendMessage("You do not have a permission to use special commands.").then(function(mmsg){mmsg.delete(2000);});}else{
-        if(mention == null){message.delete(2000); message.channel.sendMessage("Please put an invalid user.").then(function(mmsg){mmsg.delete(2000);});}else{
+        if(mention == null){message.delete(2000); message.channel.sendMessage("Please put a valid user for the first arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
+        if(!am) message.delete(2000); return message.channel.sendMessage("Please provide what message do you wanna spam them for the third arguments.").then(function(mmsg){mmsg.delete(2000);});
         am = args.slice(1).join(" ");
         message.delete(2000);
         mention.send(am);
@@ -46,11 +47,22 @@ bot.on('message', function(message){
 
     if(command === 'spam') {
         if(!bot.isOwner(message.author)){message.delete(2000); message.channel.sendMessage("You do not have a permission to use special commands.").then(function(mmsg){mmsg.delete(2000);});}else{
-        if(mention == null){message.delete(2000); message.channel.sendMessage("Please put an invalid user.").then(function(mmsg){mmsg.delete(2000);});}else{
+        if(mention == null){message.delete(2000); message.channel.sendMessage("Please put a valid user for the first arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
         am = args.slice(2).join(" ");
         message.delete(2000);
-        if(!args[1]) return message.channel.sendMessage("Please provide how many do you want to spam the user for the second arguments (spamlimit: 5).").then(function(mmsg){mmsg.delete(2000);});
-        if(!args[2]) return message.channel.sendMessage("Please provide what message do you wanna spam them for the third arguments.").then(function(mmsg){mmsg.delete(2000);});
+        if(!args[1]) return message.channel.sendMessage("Please provide how many do you want to spam the user for the second arguments.").then(function(mmsg){mmsg.delete(2000);});
+        if(isNaN(args[1])) return message.channel.sendMessage(`${args[1]} is not a number.`).then(function(mmsg){mmsg.delete(2000);});
+        if(!am) return message.channel.sendMessage("Please provide what message do you wanna spam them for the third arguments.").then(function(mmsg){mmsg.delete(2000);});
+        var i;
+        var spamcount = args[1]+1;
+        var spambreak = args[1]-1;
+        for (i = 0; i < spamcount; i++) { 
+            mention.send(am);
+            if(i==spambreak){
+                break;
+            }
+        }
+        /*
         if(args[1]=="2"){
             mention.send(am);
             mention.send(am);
@@ -77,6 +89,7 @@ bot.on('message', function(message){
             mention.send(am);
             message.channel.sendMessage("Spammed 5 messages").then(function(b_message){ b_message.delete(2000);});
         }else {message.channel.sendMessage("Please provide how many do you want to spam the user.").then(function(mmsg){mmsg.delete(2000);});}
+        */
     }}
     }
 

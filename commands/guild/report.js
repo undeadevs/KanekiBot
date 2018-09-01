@@ -29,7 +29,7 @@ class reportCommand extends commando.Command
     async run(message, { user, reason })
     {
 
-        if(!args) return;
+        if(!user) return;
 
         var rEmbed = new discord.RichEmbed()
             .setDescription(`__***--${user} has been reported--***__ \n**REPORTER:** ${message.author} \n**TIME**: ${message.createdAt} \n**REASON**: ${reason} \n**-------------------------------------**`)

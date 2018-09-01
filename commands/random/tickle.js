@@ -1,4 +1,5 @@
 const commando = require('discord.js-commando');
+const discord = require('discord.js');
 
 class tickleCommand extends commando.Command
 {
@@ -23,34 +24,13 @@ class tickleCommand extends commando.Command
 
     async run(message, { user })
     {
-        var chance = Math.floor(Math.random() * 5);
+        var pictures = ["./pics/tickled0.gif", "./pics/tickled1.gif", "./pics/tickled2.gif", "./pics/tickled3.gif", "./pics/tickled4.gif"];
+        var pic = pictures[Math.floor(Math.random() * pictures.length)];
         if(user)
         {
 
-            if(chance == 0)
-            {
-            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled0.gif"]});
-            }
+            message.say(`Tickled ${user}.`, {files: [pic]});
 
-            if(chance == 1)
-            {
-            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled1.gif"]});
-            }
-
-            if(chance == 2)
-            {
-            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled2.gif"]});
-            }
-
-            if(chance == 3)
-            {
-            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled3.gif"]});
-            }
-
-            if(chance == 4)
-            {
-            message.channel.sendMessage('tickled ' + user, {files: ["./pics/tickled4.gif"]});
-            }
         }else{message.channel.sendMessage(`${user} isn't a user.`);}
     }
 }

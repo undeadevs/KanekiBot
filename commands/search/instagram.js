@@ -38,11 +38,12 @@ class instagramCommand extends commando.Command
             const username = userInfo.entry_data.ProfilePage[0].graphql.user.username;
             const pfp = userInfo.entry_data.ProfilePage[0].graphql.user.profile_pic_url_hd;
             const fullname = userInfo.entry_data.ProfilePage[0].graphql.user.full_name;
-            const followers = userInfo.entry_data.ProfilePage[0].graphql.user.edge_follow.count;
+            const followers = userInfo.entry_data.ProfilePage[0].graphql.user.edge_followed_by.count;
+            const following = userInfo.entry_data.ProfilePage[0].graphql.user.edge_follow.count;
             const post = userInfo.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.count;
 
-            const res = [];
-            const res0 = [];
+            const postimage = [];
+            const postcaption = [];
             const npost = userInfo.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges.splice(0,1);
             for (let media of npost) {
                 const node = media.node
@@ -53,38 +54,57 @@ class instagramCommand extends commando.Command
                 }
     
                 // Push the thumbnail src in the array
-                await res.push(node.display_url);
+                await postimage.push(node.display_url);
 
                 const capt = node.edge_media_to_caption.edges[0];
 
                 for (let media of [capt]) {
                 const node = media.node
 
-                await res0.push(node.text);
+                await postcaption.push(node.text);
                 }
             }
 
-            const igEmbed = new discord.RichEmbed()
+            if(fullname){
+                var igEmbed = new discord.RichEmbed()
                     .setTitle(`Info for: ${username}`)
                     .setImage(pfp)
                     .addField(`Full Name:`, fullname,false)
                     .addField(`Followers:`, followers,false)
+                    .addField(`Following:`, following,false)
                     .addField(`Posts:`, post,false)
                     .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
+            }else{
+                var igEmbed = new discord.RichEmbed()
+                    .setTitle(`Info for: ${username}`)
+                    .setImage(pfp)
+                    .addField(`Followers:`, followers,false)
+                    .addField(`Following:`, following,false)
+                    .addField(`Posts:`, post,false)
+                    .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
+            }
 
-            const postEmbed = new discord.RichEmbed()
+            if(String(postcaption)==``){
+                var postEmbed = new discord.RichEmbed()
                     .setTitle(`${username}'s Recent Post`)
-                    .setImage(String(res))
-                    .setDescription(String(res0));
+                    .setDescription(`${username} hasn't been posting recently.`)
+                    .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
+            }else{
+                var postEmbed = new discord.RichEmbed()
+                    .setTitle(`${username}'s Recent Post`)
+                    .setImage(String(postimage))
+                    .setDescription(String(postcaption))
+                    .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
+            }
           
             message.say(igEmbed);
             await message.say(postEmbed);
-            console.log(res);
-            console.log(res0);
+            console.log(postimage);
+            console.log(postcaption);
 
         }
         catch(error){
-            message.say(`${user} is either a private instagram user or not an instagram user.`);
+            message.say(`Err: ${error}`);
         }
         }
 
