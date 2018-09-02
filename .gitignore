@@ -1,7 +1,9 @@
-node-modules/
+node_modules/
 
 config.json
+package-lock.json
 ytc.js
 tst.js
 ig.js
-dekstop.ini
+ggs.js
+desktop.ini

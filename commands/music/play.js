@@ -90,12 +90,12 @@ class playCommand extends commando.Command
 
             var sSEmbed = new RichEmbed()
             .setAuthor(`Now playing: ${song.title}`)
-            .setDescription([`**Link:** ${song.url}`, `**Channel**: ${song.channel}`, `**Description**: \n${song.desc}`].join(`\n`))
+            .setDescription([`**Link:** ${song.url}`, `**Channel**: ${song.channel}`].join(`\n`))
             .setImage(song.img)
             .setFooter(`requested by: ${song.requester}`, message.author.avatarURL);
             message.channel.sendEmbed(sSEmbed);
 
-            ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
+            //ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
             
             queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly', quality: 'highestaudio'}));
             

@@ -1,6 +1,8 @@
 const commando = require('discord.js-commando');
 const discord = require('discord.js');
 const Axios = require('axios');
+const formatNumbers = require(`../../formatNumbers`);
+const Instagram = require('axios-instagram-scraper');
 
 class instagramCommand extends commando.Command
 {
@@ -27,43 +29,16 @@ class instagramCommand extends commando.Command
         async function instagramInfo () {
 
         try{
-            const userInfoSource = await Axios.get(`https://www.instagram.com/${user}/`);
-          
-            // userInfoSource.data contains the HTML from Axios
-            const jsonObject = userInfoSource.data.match(/<script type="text\/javascript">window\._sharedData = (.*)<\/script>/)[1].slice(0, -1);
-          
-            const userInfo = JSON.parse(jsonObject);
-          
-            const uInfo = userInfo.entry_data.ProfilePage[0].graphql.user;
-            const username = userInfo.entry_data.ProfilePage[0].graphql.user.username;
-            const pfp = userInfo.entry_data.ProfilePage[0].graphql.user.profile_pic_url_hd;
-            const fullname = userInfo.entry_data.ProfilePage[0].graphql.user.full_name;
-            const followers = userInfo.entry_data.ProfilePage[0].graphql.user.edge_followed_by.count;
-            const following = userInfo.entry_data.ProfilePage[0].graphql.user.edge_follow.count;
-            const post = userInfo.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.count;
+            var ig = await Instagram.getProfile(user);
 
-            const postimage = [];
-            const postcaption = [];
-            const npost = userInfo.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges.splice(0,1);
-            for (let media of npost) {
-                const node = media.node
-                
-                // Process only if is an image
-                if ((node.__typename && node.__typename !== 'GraphImage')) {
-                    continue
-                }
-    
-                // Push the thumbnail src in the array
-                await postimage.push(node.display_url);
-
-                const capt = node.edge_media_to_caption.edges[0];
-
-                for (let media of [capt]) {
-                const node = media.node
-
-                await postcaption.push(node.text);
-                }
-            }
+            const username = ig.username
+            const pfp = ig.profile_picture;
+            const fullname = ig.full_name;
+            const followers = ig.followers
+            const following = ig.following;
+            const post = ig.post_count;
+            const postimage = ig.recent_post.image;
+            const postcaption = ig.recent_post.caption;
 
             if(fullname){
                 var igEmbed = new discord.RichEmbed()
@@ -99,8 +74,8 @@ class instagramCommand extends commando.Command
           
             message.say(igEmbed);
             await message.say(postEmbed);
-            console.log(postimage);
-            console.log(postcaption);
+
+            console.log(ig);
 
         }
         catch(error){

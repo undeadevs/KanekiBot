@@ -23,8 +23,9 @@ class purgeCommand extends commando.Command
 
     async run(message, { number })
     {
+        if(!this.client.isOwner(message.author)) return;
         if(number>100) return message.channel.sendMessage("You can't delete messages more than 100.");
-        var num = number+1;
+        var num = number;
         message.channel.bulkDelete(num);
         await message.channel.sendMessage(`Deleted ${number} messages.`);
     }

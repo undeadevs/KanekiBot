@@ -23,15 +23,11 @@ class googleCommand extends commando.Command
 
     async run(message, { text })
     {
-        google.resultsPerPage = 2;
+        google.resultsPerPage = 100;
         google(text, function (err, res){
             if(err) return message.say(`No result for: ${text}`);
            
-            for (var i = 0; i < res.links.length; ++i) {
-              var link = res.links[i];
-            if (!link.href | link === undefined) {
-                res.next;
-            } else {
+              var link = res.links[Math.floor(Math.random()*100)];
 
               const gEmbed = new discord.RichEmbed()
                     //.setAuthor(`Showing search result for: ${text}`)
@@ -39,8 +35,6 @@ class googleCommand extends commando.Command
                     .setTitle(`[${link.title}](${link.href})`)
                     .setDescription(`Description: ${link.description}`);
               message.say(gEmbed);
-            }
-            }
            
         });
     }
