@@ -4,9 +4,22 @@ var fs = require('fs');
 var ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
 
-const {token, ownerID, adminID, prefix, googleapikey} = require("../../config.json");
+const {token, ownerID, ownerID0, adminID, prefix, googleapikey} = require("../../config.json");
 
 const youtube = new yt(googleapikey);
+
+function TextAbstract(text, length) {
+    if (text == null) {
+        return "";
+    }
+    if (text.length <= length) {
+        return text;
+    }
+    text = text.substring(0, length);
+    last = text.lastIndexOf(" ");
+    text = text.substring(0, last);
+    return text + "...";
+}
 
 class playCommand extends commando.Command
 {
@@ -40,13 +53,56 @@ class playCommand extends commando.Command
 
         //adding the the songs to the queue
 
+        var pls = false
+
         try{
-            var vInfo = await youtube.getVideo( url );
+            if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+                pls = true;
+                var playlist = await youtube.getPlaylist(url);
+                var videos = await playlist.getVideos();
+			    for (var vInfo of Object.values(videos)) {
+                    var vInfo2 = await youtube.getVideoByID(vInfo.id); // eslint-disable-line no-await-in-loop
+                    await handleVideo(vInfo2);
+                    console.log(vInfo2);
+			    }
+			    message.say(`**${playlist.title}** has been added to the queue.`);
+            }else{
+                var vInfo = await youtube.getVideo( url );
+                await handleVideo(vInfo);
+            }
         }
         catch(error){
             try{
-                var vSearch = await youtube.searchVideos(url,1);
-                var vInfo = await youtube.getVideoByID( vSearch[0].id );
+                // message.awaitMessages()
+                var vSearch = await youtube.searchVideos(url,10);
+                let index = 0;
+                var searchEmbed = new RichEmbed()
+                    .setTitle(`__**Songs Selection:**__`)
+                    .setDescription(`\`\`\`md
+${vSearch.map(video2 => `${++index}. ${video2.title}`).join(`\n`)}\`\`\`
+Please provide a value to select one of the search results ranging from 1 - 10
+`);
+message.say(searchEmbed);
+                /*message.channel.send(`
+__**Songs Selection:**__
+\`\`\`${vSearch.map(video2 => `${++index}. ${video2.title}`).join(`\n`)}\`\`\`
+Please provide a value to select one of the search results ranging from 1 - 10
+`);*/
+                try {
+                    var response = await message.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+                        maxMatches: 1,
+                        time: 10000,
+                        errors: ['time']
+                    });
+                }
+                catch (e){
+                    console.error(e);
+                    return message.say('No or invalid value entered, cancelling video selection.');
+                }
+
+                const videoIndex = parseInt(response.first().content);
+                var vInfo = await youtube.getVideoByID( vSearch[videoIndex-1].id );
+                await handleVideo(vInfo);
             }
             catch(err){
                 message.say(`i couldn't obtain any search result.`);
@@ -57,18 +113,29 @@ class playCommand extends commando.Command
         //console.log(video);
         //var vInfo = await ytdl.getInfo( url );
 
-        if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].songs = [];
+        async function handleVideo(vInfo){
+        if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].paused = false, queue[message.guild.id].leaving = false, queue[message.guild.id].songs = [];
     
         var vid = {
             url: `https://www.youtube.com/watch?v=${vInfo.id}`, 
             title: vInfo.title, 
-            img: vInfo.thumbnails.maxres.url, 
+            img: vInfo.thumbnails.high.url, 
             channel: vInfo.channel.title, 
             desc: vInfo.description, 
             requester: message.author.username};
 
         queue[message.guild.id].songs.push(vid);
-        message.channel.sendMessage(`**${vid.title}** has been added to the queue.`).then(runPlay());//wait until the song added to the queue and then play the songs
+        if(pls===true) {return runPlay();}
+        
+        else {
+        let qpos = [];
+
+        queue[message.guild.id].songs.forEach((song, i) => { qpos.push(`${i+1}`);});
+        qpos = String(qpos);
+        const qp = qpos.split(",");
+        message.channel.sendMessage(`**${vid.title}** has been added to the queue position **${qp[qp.length-1]}**.`).then(runPlay());//wait until the song added to the queue and then play the songs
+        }
+        }
 
         //function that play the songs
         async function runPlay(){
@@ -77,7 +144,7 @@ class playCommand extends commando.Command
         console.log(queue);
         
         if(!message.guild.voiceConnection){message.member.voiceChannel.join().then(function(connection){
-            play(message.guild.voiceConnection, queue[message.guild.id].songs.shift());
+            play(message.guild.voiceConnection, queue[message.guild.id].songs[0]);
         });}
 
 		async function play(connection, song) {
@@ -88,20 +155,28 @@ class playCommand extends commando.Command
 				message.member.voiceChannel.leave();
             });
 
+            if(queue[message.guild.id].leaving===true){
+            }else{
             var sSEmbed = new RichEmbed()
-            .setAuthor(`Now playing: ${song.title}`)
-            .setDescription([`**Link:** ${song.url}`, `**Channel**: ${song.channel}`].join(`\n`))
+            .setAuthor(`Playing: ${song.title}`)
+            .setDescription(`
+**Link:** ${song.url}
+**Channel**: ${song.channel}`
+)
             .setImage(song.img)
             .setFooter(`requested by: ${song.requester}`, message.author.avatarURL);
             message.channel.sendEmbed(sSEmbed);
+            }
 
             //ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
             
             queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly', quality: 'highestaudio'}));
-            
+
 			queue[message.guild.id].dispatcher.on('end', () => {
-                play(connection, queue[message.guild.id].songs.shift());
+                queue[message.guild.id].songs.shift();
+                play(connection, queue[message.guild.id].songs[0]);
             });
+
         }
         }
         

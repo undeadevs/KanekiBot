@@ -26,6 +26,10 @@ class purgeChannelCommand extends commando.Command
         });
     }
 
+    hasPermission(message) {
+        return this.client.isOwner(message.author);
+    }
+
     async run(message, { channels, number })
     {
         if(number>100) return message.channel.sendMessage("You can't delete messages more than 100.");

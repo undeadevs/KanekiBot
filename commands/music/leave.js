@@ -25,7 +25,20 @@ class leaveChannelCommand extends commando.Command
         
         if(message.guild.voiceConnection)
         {
-            message.guild.voiceConnection.disconnect();
+            queue[message.guild.id].leaving = true;
+            async function stopfunc(){
+                var i;
+                var loop = (queue[message.guild.id].songs.length+1);
+                var loopbreak = (queue[message.guild.id].songs.length-1);
+                for (i = 0; i < loopbreak; i++) { 
+                    queue[message.guild.id].dispatcher.end();
+                    if(i==loopbreak){
+                        break;
+                    }
+                }
+            }
+            message.say(`Stopping songs...`);
+            stopfunc().then(message.guild.voiceConnection.disconnect());
         }
         else
         {

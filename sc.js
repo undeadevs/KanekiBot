@@ -2,7 +2,7 @@ const Commando = require('discord.js-commando');
 const discord = require('discord.js');
 const fs = require('fs');
 const config = require("./config.json");
-const bot = new Commando.Client({owner: [config.ownerID, config.adminID], unknownCommandResponse: false});
+const bot = new Commando.Client({owner: [config.ownerID, config.ownerID0, config.adminID], unknownCommandResponse: false});
 const TOKEN = config.token;
 
 bot.on('ready',function(){
@@ -36,23 +36,23 @@ bot.on('message', function(message){
     
     if(command === 'dm') {
         if(!bot.isOwner(message.author)){message.delete(2000); message.channel.sendMessage("You do not have a permission to use special commands.").then(function(mmsg){mmsg.delete(2000);});}else{
-        if(mention == null){message.delete(2000); message.channel.sendMessage("Please put a valid user for the first arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
-        if(!am) message.delete(2000); return message.channel.sendMessage("Please provide what message do you wanna spam them for the third arguments.").then(function(mmsg){mmsg.delete(2000);});
+        if(mention === null){message.delete(2000); message.channel.sendMessage("Please put a valid user for the first arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
         am = args.slice(1).join(" ");
+        if(!am){ message.delete(2000); message.channel.sendMessage("Please provide what message do you wanna dm them for the second arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
         message.delete(2000);
         mention.send(am);
         message.channel.sendMessage("Message sent").then(function(b_message){ b_message.delete(2000);});
-        }}
+        }}}
     }
 
     if(command === 'spam') {
         if(!bot.isOwner(message.author)){message.delete(2000); message.channel.sendMessage("You do not have a permission to use special commands.").then(function(mmsg){mmsg.delete(2000);});}else{
-        if(mention == null){message.delete(2000); message.channel.sendMessage("Please put a valid user for the first arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
+        if(mention === null){message.delete(2000); message.channel.sendMessage("Please put a valid user for the first arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
         am = args.slice(2).join(" ");
         message.delete(2000);
         if(!args[1]) return message.channel.sendMessage("Please provide how many do you want to spam the user for the second arguments.").then(function(mmsg){mmsg.delete(2000);});
         if(isNaN(args[1])) return message.channel.sendMessage(`${args[1]} is not a number.`).then(function(mmsg){mmsg.delete(2000);});
-        if(!am) return message.channel.sendMessage("Please provide what message do you wanna spam them for the third arguments.").then(function(mmsg){mmsg.delete(2000);});
+        if(!am){ message.delete(2000); message.channel.sendMessage("Please provide what message do you wanna spam them for the third arguments.").then(function(mmsg){mmsg.delete(2000);});}else{
         var i;
         var spamcount = args[1]+1;
         var spambreak = args[1]-1;
@@ -90,7 +90,7 @@ bot.on('message', function(message){
             message.channel.sendMessage("Spammed 5 messages").then(function(b_message){ b_message.delete(2000);});
         }else {message.channel.sendMessage("Please provide how many do you want to spam the user.").then(function(mmsg){mmsg.delete(2000);});}
         */
-    }}
+    }}}
     }
 
     /*try {

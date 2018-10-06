@@ -21,7 +21,9 @@ class kerangAjaib extends commando.Command
 
     async run(message, { pertanyaan })
     {
-        if(pertanyaan == "saya ganteng?" | args.pertanyaan == "saya ganteng")
+        const qMark = pertanyaan.slice(-1);
+        if(qMark=="?"){
+        if(pertanyaan == "saya ganteng?")
         {
             message.channel.sendMessage("N G A R E P");
         }
@@ -30,13 +32,14 @@ class kerangAjaib extends commando.Command
             var chance = Math.floor(Math.random() * 2);
             if(chance == 0)
             {
-                message.channel.sendMessage("ya");
+                message.channel.sendMessage(`ya`);
             }
             else
             {
             message.channel.sendMessage("tidak");
             }
         }
+        } else { return message.say(`Pake tanda tanya di akhir kalimat oy.`); }
     }
 }
 

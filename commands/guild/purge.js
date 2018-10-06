@@ -21,12 +21,14 @@ class purgeCommand extends commando.Command
         });
     }
 
+    hasPermission(message) {
+        return this.client.isOwner(message.author);
+    }
+
     async run(message, { number })
     {
-        if(!this.client.isOwner(message.author)) return;
         if(number>100) return message.channel.sendMessage("You can't delete messages more than 100.");
-        var num = number;
-        message.channel.bulkDelete(num);
+        message.channel.bulkDelete(number);
         await message.channel.sendMessage(`Deleted ${number} messages.`);
     }
 

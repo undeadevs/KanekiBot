@@ -4,6 +4,7 @@
   "description": "**Installation**\r `npm i`",
   "main": "index.js",
   "dependencies": {
+    "aki-api": "^2.1.0",
     "axios": "^0.18.0",
     "axios-instagram-scraper": "^1.0.1",
     "bing-image-scraper": "0.0.1",
@@ -16,7 +17,9 @@
     "google": "^2.1.0",
     "google-translate-api": "^2.3.0",
     "hoek": "^5.0.4",
-    "lodash": "^4.17.10",
+    "jimp": "^0.4.0",
+    "lodash": "^4.17.11",
+    "node-myanimelist": "^1.0.8",
     "opusscript": "^0.0.6",
     "random-js": "^1.0.8",
     "scrape-twitter": "^0.11.1",

@@ -24,7 +24,7 @@ class tickleCommand extends commando.Command
 
     async run(message, { user })
     {
-        var pictures = ["./pics/tickled0.gif", "./pics/tickled1.gif", "./pics/tickled2.gif", "./pics/tickled3.gif", "./pics/tickled4.gif"];
+        var pictures = ["./pics/tickles/tickled0.gif", "./pics/tickles/tickled1.gif", "./pics/tickles/tickled2.gif", "./pics/tickles/tickled3.gif", "./pics/tickles/tickled4.gif"];
         var pic = pictures[Math.floor(Math.random() * pictures.length)];
         if(user)
         {

@@ -7,16 +7,16 @@ const {token, ownerID, adminID, prefix, googleapikey} = require("../../config.js
 
 const youtube = new yt(googleapikey);
 
-class skipCommand extends commando.Command
+class pauseCommand extends commando.Command
 {
     constructor(client)
     {
         super(client,{
-            name: 'skip',
+            name: 'pause',
             group: 'music',
-            memberName: 'skip',
-            aliases: ['s'],
-            description: 'Skips current playing music.',
+            memberName: 'pause',
+            aliases: ['⏸'],
+            description: 'Pauses current playing music.',
             guildOnly: true
         });
     }
@@ -31,17 +31,18 @@ class skipCommand extends commando.Command
         if(message.guild.voiceConnection)
         {
             var squeue = queue[message.guild.id];
-            if(!squeue) return message.say(`There is nothing to skip`);
+            if(!squeue) message.say('There is nothing to pause.');
             if(squeue.dispatcher){
-                message.say(`Song skipped.`)
-                squeue.dispatcher.end();
+                queue[message.guild.id].paused = true;
+                message.say(`Song paused.`)
+                squeue.dispatcher.pause();
             }
         }
         else
         {
-            message.reply("You can't skip anything if i'm outside of the voice channel.");
+            message.reply("You can't pause anything if i'm outside of the voice channel.");
         }
     }
 }
 
-module.exports = skipCommand;
+module.exports = pauseCommand;

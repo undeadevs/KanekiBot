@@ -25,15 +25,17 @@ class googleCommand extends commando.Command
     {
         google.resultsPerPage = 100;
         google(text, function (err, res){
-            if(err) return message.say(`No result for: ${text}`);
-           
-              var link = res.links[Math.floor(Math.random()*100)];
+            if(err) return console.log(`Err: ${err}`);
+              var link = res.links[Math.floor(Math.random()*99)];
+              if (!link.href) return res.next;
+              if(link===undefined) return message.say(`No result.`)
+              if(err) return console.log(`Err: ${err}`);
 
               const gEmbed = new discord.RichEmbed()
                     //.setAuthor(`Showing search result for: ${text}`)
                     .setAuthor(`Showing search result for: ${text}`)
-                    .setTitle(`[${link.title}](${link.href})`)
-                    .setDescription(`Description: ${link.description}`);
+                    .setTitle(`[${link.title}](${link.href})`);
+                    //.setDescription(`Description: ${link.description}`);
               message.say(gEmbed);
            
         });

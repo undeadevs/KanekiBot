@@ -38,8 +38,9 @@ class queueCommand extends commando.Command
 
         var sQEmbed = new RichEmbed()
             .setTitle(`__**${message.guild.name}'s Music Queue:**__`)
-            .setDescription(`${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``)
-            .setFooter(`Currently ${tosend.length} songs queued`);
+            .setDescription(`${(tosend.length > 15 ? '*[Only 15 shown]*' : '')}\n\`\`\`md
+${tosend.slice(0,14).join('\n')}
+\`\`\``);
 
         if(tosend.length==0) return message.say("There is nothing in the queue.");
 

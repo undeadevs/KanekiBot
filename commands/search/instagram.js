@@ -1,8 +1,8 @@
 const commando = require('discord.js-commando');
 const discord = require('discord.js');
 const Axios = require('axios');
-const formatNumbers = require(`../../formatNumbers`);
 const Instagram = require('axios-instagram-scraper');
+const formatNumbers = require('../../formatNumbers')
 
 class instagramCommand extends commando.Command
 {

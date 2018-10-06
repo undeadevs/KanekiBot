@@ -1,4 +1,5 @@
 const commando = require('discord.js-commando');
+const { RichEmbed } = require('discord.js');
 var fs = require('fs');
 var ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
@@ -7,16 +8,16 @@ const {token, ownerID, adminID, prefix, googleapikey} = require("../../config.js
 
 const youtube = new yt(googleapikey);
 
-class skipCommand extends commando.Command
+class npCommand extends commando.Command
 {
     constructor(client)
     {
         super(client,{
-            name: 'skip',
+            name: 'nowplaying',
             group: 'music',
-            memberName: 'skip',
-            aliases: ['s'],
-            description: 'Skips current playing music.',
+            memberName: 'nowplaying',
+            aliases: ['np'],
+            description: 'Shows currently playing music.',
             guildOnly: true
         });
     }
@@ -30,18 +31,15 @@ class skipCommand extends commando.Command
 
         if(message.guild.voiceConnection)
         {
-            var squeue = queue[message.guild.id];
-            if(!squeue) return message.say(`There is nothing to skip`);
-            if(squeue.dispatcher){
-                message.say(`Song skipped.`)
-                squeue.dispatcher.end();
-            }
+            var npEmbed = new RichEmbed()
+            .setDescription(`Now playing: \`${queue[message.guild.id].songs[0].title}\` - Requested by: \`${queue[message.guild.id].songs[0].requester}\``);
+            message.channel.sendEmbed(npEmbed);
         }
         else
         {
-            message.reply("You can't skip anything if i'm outside of the voice channel.");
+            message.reply("You can't use this command if i'm outside of the voice channel.");
         }
     }
 }
 
-module.exports = skipCommand;
+module.exports = npCommand;
