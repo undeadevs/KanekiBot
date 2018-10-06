@@ -1,4 +1,4 @@
-﻿# KanekiBot
+﻿# NeraiBot
 **Installation**
 `npm i`
 
