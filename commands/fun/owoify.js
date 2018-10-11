@@ -8,7 +8,7 @@ class UwU extends commando.Command
     {
         super(client,{
             name: 'owoify',
-            group: 'random',
+            group: 'fun',
             memberName: 'owoify',
             description: 'OwO.',
 			args: [

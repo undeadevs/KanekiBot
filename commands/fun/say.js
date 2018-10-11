@@ -7,7 +7,7 @@ class sayCommand extends commando.Command
     {
         super(client,{
             name: 'say',
-            group: 'random',
+            group: 'fun',
             memberName: 'say',
             description: 'Commands the bot to says something.',
             args: [

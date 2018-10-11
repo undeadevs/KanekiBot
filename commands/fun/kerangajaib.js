@@ -6,7 +6,7 @@ class kerangAjaib extends commando.Command
     {
         super(client,{
             name: 'apakah',
-            group: 'random',
+            group: 'fun',
             memberName: 'apakah',
             description: 'Kerang Ajaib dari Spongebob.',
             args: [

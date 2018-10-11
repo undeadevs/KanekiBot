@@ -7,7 +7,7 @@ class myPPCommand extends commando.Command
     {
         super(client,{
             name: 'mypp',
-            group: 'random',
+            group: 'fun',
             memberName: 'mypp',
             description: 'Shows my Profile Pic.'
         });

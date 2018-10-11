@@ -10,7 +10,7 @@ class aQuoteCommand extends commando.Command
         super(client,{
             name: 'animequote',
             aliases: ['anime-quote'],
-            group: 'random',
+            group: 'fun',
             memberName: 'animequote',
             description: 'Shows random anime quotes.'
         });

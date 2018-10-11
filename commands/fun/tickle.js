@@ -7,7 +7,7 @@ class tickleCommand extends commando.Command
     {
         super(client,{
             name: 'tickle',
-            group: 'random',
+            group: 'fun',
             memberName: 'tickle',
             description: 'Tickles a user.',
             guildOnly: true,

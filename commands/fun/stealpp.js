@@ -7,7 +7,7 @@ class stealPPCommand extends commando.Command
     {
         super(client,{
             name: 'stealpp',
-            group: 'random',
+            group: 'fun',
             memberName: 'stealpp',
             description: 'Steals someone Profile Pic.',
             args: [
