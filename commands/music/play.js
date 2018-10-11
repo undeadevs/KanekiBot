@@ -4,7 +4,7 @@ var fs = require('fs');
 var ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
 
-//const {googleapikey} = require("../../config.json");
+const dotenv = require('dotenv').config();
 
 const youtube = new yt(process.env.googleapikey);
 

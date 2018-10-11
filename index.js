@@ -1,6 +1,6 @@
 const Commando = require('discord.js-commando');
 const fs = require('fs');
-//const {token, ownerID, adminID0, adminID1, prefix, googleapikey} = require("./config.json");
+const dotenv = require('dotenv').config();
 const bot = new Commando.Client({owner: [process.env.ownerID, process.env.adminID0, process.env.adminID1], commandPrefix: process.env.prefix});
 
 const ytdl = require('ytdl-core');

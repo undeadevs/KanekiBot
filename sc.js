@@ -1,7 +1,7 @@
 const Commando = require('discord.js-commando');
 const discord = require('discord.js');
 const fs = require('fs');
-//const config = require("./config.json");
+const dotenv = require('dotenv').config();
 const bot = new Commando.Client({owner: [process.env.ownerID, process.env.adminID0, process.env.adminID1], unknownCommandResponse: false});
 const TOKEN = process.env.token;
 
