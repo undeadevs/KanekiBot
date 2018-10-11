@@ -12,7 +12,7 @@ const youtube = new yt(googleapikey);
 //inviteLink https://discordapp.com/oauth2/authorize?client_id=478376842248716291&scope=bot&permissions=2146958847
 
 bot.registry.registerDefaultTypes();
-bot.registry.registerGroup('random', 'Random');
+bot.registry.registerGroup('fun', 'Fun');
 bot.registry.registerGroup('music', 'Music');
 bot.registry.registerGroup('math', 'Math');
 bot.registry.registerGroup('guild', 'Guild');
