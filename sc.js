@@ -115,4 +115,4 @@ bot.on('message', function(message){
 
 //END
 
-// /bot.login(TOKEN);
+//bot.login(TOKEN);
