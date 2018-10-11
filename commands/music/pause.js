@@ -1,11 +1,5 @@
 const commando = require('discord.js-commando');
 var fs = require('fs');
-var ytdl = require('ytdl-core');
-const yt = require('simple-youtube-api');
-
-const {token, ownerID, adminID, prefix, googleapikey} = require("../../config.json");
-
-const youtube = new yt(googleapikey);
 
 class pauseCommand extends commando.Command
 {

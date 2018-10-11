@@ -1,12 +1,6 @@
 const commando = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
 var fs = require('fs');
-var ytdl = require('ytdl-core');
-const yt = require('simple-youtube-api');
-
-const {token, ownerID, adminID, prefix, googleapikey} = require("../../config.json");
-
-const youtube = new yt(googleapikey);
 
 class queueCommand extends commando.Command
 {
@@ -39,7 +33,7 @@ class queueCommand extends commando.Command
         var sQEmbed = new RichEmbed()
             .setTitle(`__**${message.guild.name}'s Music Queue:**__`)
             .setDescription(`${(tosend.length > 15 ? '*[Only 15 shown]*' : '')}\n\`\`\`md
-${tosend.slice(0,14).join('\n')}
+${tosend.slice(0,15).join('\n')}
 \`\`\``);
 
         if(tosend.length==0) return message.say("There is nothing in the queue.");

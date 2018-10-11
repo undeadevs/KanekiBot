@@ -1,12 +1,6 @@
 const commando = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
 var fs = require('fs');
-var ytdl = require('ytdl-core');
-const yt = require('simple-youtube-api');
-
-const {token, ownerID, adminID, prefix, googleapikey} = require("../../config.json");
-
-const youtube = new yt(googleapikey);
 
 class npCommand extends commando.Command
 {

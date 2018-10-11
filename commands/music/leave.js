@@ -1,7 +1,5 @@
 const commando = require('discord.js-commando');
 
-const {token, ownerID, adminID, prefix, googleapikey} = require("../../config.json");
-
 class leaveChannelCommand extends commando.Command
 {
     constructor(client)

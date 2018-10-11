@@ -2,7 +2,7 @@ const Commando = require('discord.js-commando');
 const discord = require('discord.js');
 const fs = require('fs');
 const config = require("./config.json");
-const bot = new Commando.Client({owner: [config.ownerID, config.ownerID0, config.adminID], unknownCommandResponse: false});
+const bot = new Commando.Client({owner: [config.ownerID, config.adminID0, config.adminID1], unknownCommandResponse: false});
 const TOKEN = config.token;
 
 bot.on('ready',function(){

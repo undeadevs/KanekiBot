@@ -1,7 +1,7 @@
 const Commando = require('discord.js-commando');
 const fs = require('fs');
-const {token, ownerID, ownerID0, adminID, prefix, googleapikey} = require("./config.json");
-const bot = new Commando.Client({owner: [ownerID, ownerID0, adminID], commandPrefix: prefix});
+const {token, ownerID, adminID0, adminID1, prefix, googleapikey} = require("./config.json");
+const bot = new Commando.Client({owner: [ownerID, adminID0, adminID1], commandPrefix: prefix});
 
 const ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
