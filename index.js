@@ -1,12 +1,12 @@
 const Commando = require('discord.js-commando');
 const fs = require('fs');
-const {token, ownerID, adminID0, adminID1, prefix, googleapikey} = require("./config.json");
-const bot = new Commando.Client({owner: [ownerID, adminID0, adminID1], commandPrefix: prefix});
+//const {token, ownerID, adminID0, adminID1, prefix, googleapikey} = require("./config.json");
+const bot = new Commando.Client({owner: [process.env.ownerID, process.env.adminID0, process.env.adminID1], commandPrefix: process.env.prefix});
 
 const ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
 
-const youtube = new yt(googleapikey);
+const youtube = new yt(process.env.googleapikey);
 
 //clientID 478376842248716291
 //inviteLink https://discordapp.com/oauth2/authorize?client_id=478376842248716291&scope=bot&permissions=2146958847
@@ -90,4 +90,4 @@ bot.on('message', function(message){
 
 });
 
-bot.login(token);
+bot.login(process.env.token);
