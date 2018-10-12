@@ -10,7 +10,7 @@ bot.on('ready',function(){
 });
 
 //SPECIALCOMMAND CODE
-const prefix = "$";
+const prefix = "//";
 
 bot.on('message', function(message){
     msg = message.content.toLowerCase();
