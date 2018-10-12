@@ -25,7 +25,7 @@ bot.on('message', function(message){
         if(!bot.isOwner(message.author)){message.delete(2000); message.channel.sendMessage("You do not have a permission to use special commands.").then(function(mmsg){mmsg.delete(2000);});}else{
         var hEmbed = new discord.RichEmbed()
             .setColor("0xBF4C4C")
-            .addField(`__**SPECIAL COMMANDS**__`, `**prefix:** $`, true)
+            .addField(`__**SPECIAL COMMANDS**__`, `**prefix:** ${prefix}`, true)
             .addField(`**DM**`, `**Desc:** \`Dms user using bot.\` \n**Usage:** \`$dm <user> <messages>\``, false)
             .addField(`**SPAM**`, `**Desc:** \`Spams user.\` \n**Usage:** \`$spam <user> <amount> <messages>\``, false);
         if(message.channel.type=="dm") return message.author.send(hEmbed);
