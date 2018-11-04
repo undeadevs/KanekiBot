@@ -27,7 +27,7 @@ class pauseCommand extends commando.Command
             var squeue = queue[message.guild.id];
             if(!squeue) return message.say(`There is nothing to resume.`);
             if(queue[message.guild.id].paused === false) return message.say(`There is no paused music to resume.`);
-            queue[message.guild.id].paused == false;
+            queue[message.guild.id].paused = false;
             if(squeue.dispatcher){
                 message.say(`Song resumed.`);
                 squeue.dispatcher.resume();
