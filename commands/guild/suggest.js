@@ -16,17 +16,22 @@ class suggestCommand extends commando.Command
                     key: 'suggestion',
                     prompt:'Please suggest something.',
                     type: 'string'
+                },
+                {
+                    key: 'suggestionch',
+                    prompt:'Set your suggestion channel!',
+                    type: 'string',
+                    default: 'suggestions'
                 }
             ]
         });
     }
 
-    async run(message, args)
+    async run(message, {suggestion, suggestionch})
     {
-        var suggestion = args.suggestion;
-        if(!args) return;
-        var sc = message.member.guild.channels.find("name", "suggestions");
-        if(!sc) return;
+        if(!suggestion) return;
+        var sc = message.member.guild.channels.find("name", suggestionch);
+        if(!sc) return message.say('Please set your suggestion channel at the end of the command.');
         sc.sendMessage(`*${message.author} suggested ${suggestion}*`);
         console.log(`@${message.author.tag} suggested ${suggestion}`);
     }

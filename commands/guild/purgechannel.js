@@ -11,6 +11,7 @@ class purgeChannelCommand extends commando.Command
             memberName: 'purgechannel',
             description: 'Deletes message on a spesific channel.',
             guildOnly: true,
+            userPermissions: ['MANAGE_MESSAGES'],
             args: [
                 {
                     key: 'channels',
@@ -26,16 +27,13 @@ class purgeChannelCommand extends commando.Command
         });
     }
 
-    hasPermission(message) {
-        return this.client.isOwner(message.author);
-    }
-
     async run(message, { channels, number })
     {
         if(number>100) return message.channel.sendMessage("You can't delete messages more than 100.");
+        const fetched = await message.channel.fetchMessages({limit: number});
         let c = message.member.guild.channels.find("name", channels.name);
         c.bulkDelete(number);
-        await message.channel.sendMessage(`Deleted ${number} messages on ${channels.name}.`);
+        await message.channel.sendMessage(`Deleted ${fetched.size} messages on ${channels.name}.`);
     }
 
 }

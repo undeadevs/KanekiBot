@@ -11,6 +11,7 @@ class renameChannelCommand extends commando.Command
             memberName: 'renamechannel',
             description: 'Renames channel name.',
             guildOnly: true,
+            userPermissions: ['MANAGE_MESSAGES'],
             args: [
                 {
                     key: 'channels1',
@@ -24,10 +25,6 @@ class renameChannelCommand extends commando.Command
                 }
             ]
         });
-    }
-
-    hasPermission(message) {
-        return this.client.isOwner(message.author);
     }
 
     async run(message, { channels1, channels2 })
