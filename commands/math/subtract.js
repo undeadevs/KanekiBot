@@ -6,9 +6,9 @@ class subtractMathCommand extends commando.Command
     constructor(client)
     {
         super(client,{
-            name: 'substract-nums',
+            name: 'subtract-nums',
             group: 'math',
-            memberName: 'substract-nums',
+            memberName: 'subtract-nums',
             description: 'Subtracts numbers.',
             examples: ['substract-nums 74 9'],
             args: [

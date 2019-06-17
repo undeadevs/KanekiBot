@@ -24,6 +24,7 @@ class googleCommand extends commando.Command
     async run(message, { text })
     {
         google.resultsPerPage = 100;
+        if(1==1) return message.say(`Unfortunately this command is no longer working.`);
         google(text, function (err, res){
             if(err) return console.log(`Err: ${err}`);
               var link = res.links[Math.floor(Math.random()*99)];
