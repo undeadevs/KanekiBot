@@ -56,7 +56,7 @@ class twitterCommand extends commando.Command
                 .addField(`Name:`, uInfo.n,false)
                 .addField(`Followers:`, `${formatNumbers(uInfo.followers, 0, `.`, `,`)}`,false)
                 .addField(`Following:`, `${formatNumbers(uInfo.following, 0, `.`, `,`)}`,false)
-                .addField(`Tweets:`, uInfo.tweets,false)
+                .addField(`Tweets:`, `${formatNumbers(uInfo.tweets, 0, `.`, `,`)}`,false)
                 .addField(`Bio:`, uInfo.bio,false)
                 .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
             }
