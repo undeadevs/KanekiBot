@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 const discord = require('discord.js');
 var sTwitter = require('scrape-twitter');
+const formatNumbers = require(`../../formatNumbers`);
 
 class twitterCommand extends commando.Command
 {
@@ -43,8 +44,8 @@ class twitterCommand extends commando.Command
                 .setTitle(`Info for: ${uInfo.sn}`)
                 .setImage(uInfo.pfp)
                 .addField(`Name:`, uInfo.n,false)
-                .addField(`Followers:`, uInfo.followers,false)
-                .addField(`Following:`, uInfo.following,false)
+                .addField(`Followers:`, `${formatNumbers(uInfo.followers, 0, `.`, `,`)}`,false)
+                .addField(`Following:`, `${formatNumbers(uInfo.following, 0, `.`, `,`)}`,false)
                 .addField(`Tweets:`, uInfo.tweets,false)
                 .addField(`Bio:`, uInfo.bio,false)
                 .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
