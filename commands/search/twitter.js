@@ -40,6 +40,16 @@ class twitterCommand extends commando.Command
             }
         
             console.log(uInfo);
+            if(!uInfo.bio || String(uInfo.bio)==``){
+                var twtEmbed = new discord.RichEmbed()
+                .setTitle(`Info for: ${uInfo.sn}`)
+                .setImage(uInfo.pfp)
+                .addField(`Name:`, uInfo.n,false)
+                .addField(`Followers:`, `${formatNumbers(uInfo.followers, 0, `.`, `,`)}`,false)
+                .addField(`Following:`, `${formatNumbers(uInfo.following, 0, `.`, `,`)}`,false)
+                .addField(`Tweets:`, uInfo.tweets,false)
+                .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
+            }else{
             var twtEmbed = new discord.RichEmbed()
                 .setTitle(`Info for: ${uInfo.sn}`)
                 .setImage(uInfo.pfp)
@@ -49,6 +59,7 @@ class twitterCommand extends commando.Command
                 .addField(`Tweets:`, uInfo.tweets,false)
                 .addField(`Bio:`, uInfo.bio,false)
                 .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
+            }
             message.say(twtEmbed)
 
             }
