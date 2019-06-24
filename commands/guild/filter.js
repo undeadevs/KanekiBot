@@ -24,10 +24,10 @@ class filterCommand extends commando.Command
 
     async run(message, { toggle })
     {
-        if(toggle == `on`){ return test=true;}else
-        if(toggle == `off`){ return test=false;}else{
-            return message.say(`You can only choose either on or off.`);
-        }
+        //if(toggle == `on`){ return test=true;}else
+        //if(toggle == `off`){ return test=false;}else{
+        //    return message.say(`You can only choose either on or off.`);
+        //}
     }
 
 }

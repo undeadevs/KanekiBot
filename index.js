@@ -32,7 +32,6 @@ bot.on('ready',function(){
 });
 
 global.queue = {};
-global.test = false;
 
 bot.msgs = require("./msgs.json");
 
@@ -70,6 +69,8 @@ bot.on('guildMemberAdd', function(member){
 });
 }
 catch(error){}
+
+global.test = false;
 
 bot.on('message', function(message){
     mention = message.mentions.users.first();
