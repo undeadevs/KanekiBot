@@ -88,7 +88,7 @@ bot.on('message', function(message){
 
     if(foundWords){
         message.delete();
-        message.say(`Sorry, you can't use that word here.`);
+        message.channel.send(`Sorry, you can't use that word here.`);
     }
 
     if(msg == "hello" | msg == "hi" | msg == "hey"){
