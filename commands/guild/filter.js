@@ -9,7 +9,7 @@ class filterCommand extends commando.Command
             name: 'filter',
             group: 'guild',
             memberName: 'filter',
-            description: 'Commands the bot to says something.',
+            description: 'Filters bad words.',
             guildOnly: true,
             userPermissions: ['ADMINISTRATOR'],
             args: [
@@ -24,8 +24,9 @@ class filterCommand extends commando.Command
 
     async run(message, { toggle })
     {
-        if(toggle == `on`){ return global.test=true;}else
-        if(toggle == `off`){ return global.test=false;}else{
+        console.log(global.test);
+        if(toggle == `on`){ return global.test = true;}else
+        if(toggle == `off`){ return global.test = false;}else{
             return message.say(`You can only choose either on or off.`);
         }
     }
