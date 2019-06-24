@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 const discord = require('discord.js');
 
+try{
 class filterCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -21,7 +22,7 @@ class filterCommand extends commando.Command {
     }
 
     async run(message, { toggle }) {
-        try{
+        
         if (toggle == `on`) {
             return global.test = true;
         } else
@@ -30,9 +31,8 @@ class filterCommand extends commando.Command {
             } else {
                 return message.say(`You can only choose either on or off.`);
             }
-        }catch(e){ return;}
     }
 
 }
 
-module.exports = filterCommand;
+module.exports = filterCommand;}catch(e){return console.log(`undefined`);}
