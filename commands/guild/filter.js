@@ -21,7 +21,6 @@ class filterCommand extends commando.Command {
     }
 
     async run(message, { toggle }) {
-        console.log(global.test);
         if (toggle == `on`) {
             return global.test = true;
         } else
@@ -30,7 +29,7 @@ class filterCommand extends commando.Command {
             } else {
                 return message.say(`You can only choose either on or off.`);
             }
-    }
+    }catch(e){return;}
 
 }
 
