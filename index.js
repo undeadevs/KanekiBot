@@ -44,7 +44,7 @@ bot.on('guildMemberAdd', function(member){
     if(bot.isOwner(member)){
         let or = member.guild.roles.find("name", "owner");
         let gc = member.guild.channels.find("name", "lobby");
-        if(!gc){return;}
+        if(!gc) return;
         if(!or){
             return gc.send(['Welcome to the Server ' + member, rules]);
         }
@@ -53,6 +53,7 @@ bot.on('guildMemberAdd', function(member){
     }else if(!bot.isOwner(member)){
         let mr = member.guild.roles.find("name", "trash");
         let gc = member.guild.channels.find("name", "lobby");
+        if(!gc) return;
         if(!mr){
             return gc.send(['Welcome to the Server ' + member]);
         }
