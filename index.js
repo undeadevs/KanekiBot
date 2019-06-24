@@ -1,7 +1,7 @@
 const Commando = require('discord.js-commando');
 const fs = require('fs');
 const dotenv = require('dotenv').config();
-const bot = new Commando.Client({owner: [process.env.ownerID, process.env.adminID0, process.env.adminID1], commandPrefix: process.env.prefix});
+const bot = new Commando.Client({owner: [process.env.ownerID, process.env.adminID0, process.env.adminID1], commandPrefix: process.env.prefix, unknownCommandResponse: false});
 
 const ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
