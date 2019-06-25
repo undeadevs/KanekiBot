@@ -43,7 +43,6 @@ class osuCommand extends commando.Command
             .setDescription(`
             URL: ${user.profileURL}
             ID: ${user.id}
-            PP: ${user.pp.pp}
             ACC: ${user.accuracy}`)
             .setImage(user.userAvatar);
             
