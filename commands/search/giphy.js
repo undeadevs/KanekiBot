@@ -27,6 +27,7 @@ class giphyCommand extends commando.Command {
     async run(message, { text }) {
         var txt = text.toLowerCase();
 
+        var x;
         for(x=0;x<profanities.length;x++){
             if(txt == profanities.toLowerCase()){
                 return message.say(`No, don't use that word.`);
