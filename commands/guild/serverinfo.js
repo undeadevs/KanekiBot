@@ -35,6 +35,7 @@ class serverInfoCommand extends commando.Command
     {
 
         let sIEmbed = new discord.RichEmbed()
+        .setColor("#cc0000")
         .setAuthor(`${message.guild.name} - Informations`, message.guild.iconURL) // Will set text on top of embed to <guild name> - Informations, and will place guild icon next to it
         .addField('Server owner', message.guild.owner, true) // Will add in-line field with server owner
         .addField('Server region', `${String(message.guild.region).charAt(0).toUpperCase()}${String(message.guild.region).slice(1)}`, false) // Will add in-line field with server region

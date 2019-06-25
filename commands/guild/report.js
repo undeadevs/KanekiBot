@@ -40,6 +40,7 @@ class reportCommand extends commando.Command
         if(message.author==user) return message.say(`You can't report yourself.`);
 
         var rEmbed = new discord.RichEmbed()
+            .setColor("#cc0000")
             .setDescription(`__***--${user} has been reported--***__ \n**REPORTER:** ${message.author} \n**TIME**: ${message.createdAt} \n**REASON**: ${reason} \n**-------------------------------------**`)
 
         var rc = message.member.guild.channels.find("name", reportch);

@@ -78,6 +78,7 @@ class playCommand extends commando.Command
                 let index = 0;
                 var searchEmbed = new RichEmbed()
                     .setTitle(`__**Songs Selection:**__`)
+                    .setColor("#cc0000")
                     .setDescription(`\`\`\`md
 ${vSearch.map(video2 => `${++index}. ${video2.title}`).join(`\n`)}\`\`\`
 Please provide a value to select one of the search results ranging from 1 - 10
@@ -164,6 +165,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
 **Channel**: ${song.channel}`
 )
             .setImage(song.img)
+            .setColor("#cc0000")
             .setFooter(`requested by: ${song.requester}`, message.author.avatarURL);
             message.channel.sendEmbed(sSEmbed);
             }

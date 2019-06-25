@@ -48,6 +48,7 @@ class instagramCommand extends commando.Command
                     .addField(`Followers:`, followers,false)
                     .addField(`Following:`, following,false)
                     .addField(`Posts:`, post,false)
+                    .setColor("#cc0000")
                     .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
             }else{
                 var igEmbed = new discord.RichEmbed()
@@ -56,6 +57,7 @@ class instagramCommand extends commando.Command
                     .addField(`Followers:`, followers,false)
                     .addField(`Following:`, following,false)
                     .addField(`Posts:`, post,false)
+                    .setColor("#cc0000")
                     .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
             }
 
@@ -63,12 +65,14 @@ class instagramCommand extends commando.Command
                 var postEmbed = new discord.RichEmbed()
                     .setTitle(`${username}'s Recent Post`)
                     .setDescription(`${username} hasn't been posting recently.`)
+                    .setColor("#cc0000")
                     .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
             }else{
                 var postEmbed = new discord.RichEmbed()
                     .setTitle(`${username}'s Recent Post`)
                     .setImage(String(postimage))
                     .setDescription(String(postcaption))
+                    .setColor("#cc0000")
                     .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
             }
           

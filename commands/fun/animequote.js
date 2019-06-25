@@ -24,6 +24,7 @@ class aQuoteCommand extends commando.Command
     var qc = aq.name;
     var qa = aq.anime;
         const qEmbed = new RichEmbed()
+            .setColor("#cc0000")
             .setDescription(`
 *\"${aq.quote}\"*
 **-${aq.name} [${aq.anime}]**

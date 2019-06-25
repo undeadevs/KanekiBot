@@ -45,17 +45,19 @@ class osuCommand extends commando.Command
             console.log(user);
 
             const osuEmbed = new discord.RichEmbed()
-            .setAuthor(`Info for: ${user.name}`)
-            .setDescription(`
-            URL: ${user.profileURL}
-            ID: ${user.id}
-            PP: ${user.pp.pp}
-            ACC: ${user.accuracy}
-            SS+: ${user.counts["SS+"]}
-            SS: ${user.counts["SS"]}
-            S+: ${user.counts["S+"]}
-            S: ${user.counts["S"]}
-            A: ${user.counts["A"]}`)
+            .setTitle(`Info for: ${username}`)
+            .addField(`Name :`, `${user.name}`,false)
+            .addField(`URL :`, `${user.profileURL}`,false)
+            .addField(`ID :`, `${user.id}`,false)
+            .addField(`Performance Points :`, `${user.pp.pp}`,false)
+            .addField(`Accuracy :`, `${user.accuracy}`,false)
+            .addField(`SS+ :`, `${user.counts["SS+"]}`,false)
+            .addField(`SS :`, `${user.counts["SS"]}`,false)
+            .addField(`S+ :`, `${user.counts["S+"]}`,false)
+            .addField(`S :`, `${user.counts["S"]}`,false)
+            .addField(`A :`, `${user.counts["A"]}`,false)
+            .setColor("#cc0000")
+            .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL)
             .setImage(user.userAvatar);
             message.say(osuEmbed);
             

@@ -48,6 +48,7 @@ class twitterCommand extends commando.Command
                 .addField(`Followers:`, `${formatNumbers(uInfo.followers, 0, `.`, `,`)}`,false)
                 .addField(`Following:`, `${formatNumbers(uInfo.following, 0, `.`, `,`)}`,false)
                 .addField(`Tweets:`, uInfo.tweets,false)
+                .setColor("#cc0000")
                 .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
             }else{
             var twtEmbed = new discord.RichEmbed()
@@ -58,6 +59,7 @@ class twitterCommand extends commando.Command
                 .addField(`Following:`, `${formatNumbers(uInfo.following, 0, `.`, `,`)}`,false)
                 .addField(`Tweets:`, `${formatNumbers(uInfo.tweets, 0, `.`, `,`)}`,false)
                 .addField(`Bio:`, uInfo.bio,false)
+                .setColor("#cc0000")
                 .setFooter(`Requested by: ${message.author.username}`, message.author.avatarURL);
             }
             message.say(twtEmbed)
