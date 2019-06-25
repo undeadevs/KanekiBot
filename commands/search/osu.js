@@ -50,11 +50,22 @@ class osuCommand extends commando.Command
             URL: ${user.profileURL}
             ID: ${user.id}
             PP: ${user.pp.pp}
-            ACC: ${user.accuracy}`)
+            ACC: ${user.accuracy}
+            SS+: ${user.counts["SS+"]}
+            SS: ${user.counts["SS"]}
+            S+: ${user.counts["S+"]}
+            S: ${user.counts["S"]}
+            A: ${user.counts["A"]}
+            B: ${user.counts["B"]}
+            C: ${user.counts["C"]}
+            D: ${user.counts["D"]}`)
             .setImage(user.userAvatar);
             message.say(osuEmbed);
             
-        }).catch(error=>{return message.say(`Invalid args.`);});
+        }).catch(error=>{
+            console.log(error);
+            return message.say(`Invalid args.`);
+        });
         
     }
 
