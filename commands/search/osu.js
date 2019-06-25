@@ -35,7 +35,13 @@ class osuCommand extends commando.Command
     async run(message, { username, mode })
     {
 
-        osu.getUser({u: username, m: mode}).then(user => {
+        var valuemode;
+        if(mode==`std`){valuemode=`0`}else
+        if(mode==`taiko`){valuemode=`1`}else
+        if(mode==`ctb`){valuemode=`2`}else
+        if(mode==`mania`){valuemode=`3`}
+
+        osu.getUser({u: username, m: valuemode}).then(user => {
             console.log(user);
 
             const osuEmbed = new discord.RichEmbed()
@@ -43,8 +49,10 @@ class osuCommand extends commando.Command
             .setDescription(`
             URL: ${user.profileURL}
             ID: ${user.id}
+            PP: ${user.pp.pp}
             ACC: ${user.accuracy}`)
             .setImage(user.userAvatar);
+            message.say(osuEmbed);
             
         }).catch(error=>{return message.say(`Invalid args.`);});
         
