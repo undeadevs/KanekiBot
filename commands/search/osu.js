@@ -55,10 +55,7 @@ class osuCommand extends commando.Command
             SS: ${user.counts["SS"]}
             S+: ${user.counts["S+"]}
             S: ${user.counts["S"]}
-            A: ${user.counts["A"]}
-            B: ${user.counts["B"]}
-            C: ${user.counts["C"]}
-            D: ${user.counts["D"]}`)
+            A: ${user.counts["A"]}`)
             .setImage(user.userAvatar);
             message.say(osuEmbed);
             
