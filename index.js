@@ -28,7 +28,8 @@ bot.on('ready', function () {
 
     bot.user.setActivity('Unravel', {type: 'LISTENING'});*/
     console.log(`[Bot is online | Node: ${process.version} | Discord.js-Commando: v${Commando.version}]\nConnected as: ${bot.user.username} (ID: ${bot.user.id})\nGuilds Connected: ${bot.guilds.size}`);
-            bot.user.setActivity(`${bot.guilds.size} Servers | ${process.env.prefix}help`, { type: 'WATCHING' });
+    var activityArray = ["bot.user.setActivity(`${bot.guilds.size} Servers | ${process.env.prefix}help`, { type: 'WATCHING' });", "Music Command Is FIXED!`, { type: 'PLAYING' });"];
+    eval(Math.floor(Math.random()*activityArray.length));
 });
 
 global.queue = {};
