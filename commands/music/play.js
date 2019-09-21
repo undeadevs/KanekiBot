@@ -140,47 +140,23 @@ Please provide a value to select one of the search results ranging from 1 - 10
 
         //function that play the songs
         async function runPlay(){
-		queue[message.guild.id].playing = true;
+            queue[message.guild.id].playing = true;
 
-        console.log(queue);
-        
-        if(!message.guild.voiceConnection){message.member.voiceChannel.join().then(function(connection){
-            play(message.guild.voiceConnection, queue[message.guild.id].songs[0]);
-        });}}
-
-		async function play(connection, song) {
-            console.log(song);
-
-			if (song === undefined) return message.channel.sendMessage('Queue finished.').then(() => {
-				queue[message.guild.id].playing = false;
-				message.member.voiceChannel.leave();
-            });
-
-            if(queue[message.guild.id].leaving===true){
-            }else{
-            var sSEmbed = new RichEmbed()
-            .setAuthor(`Playing: ${song.title}`)
-            .setDescription(`
-**Link:** ${song.url}
-**Channel**: ${song.channel}`
-)
-            .setImage(song.img)
-            .setColor("#cc0000")
-            .setFooter(`requested by: ${song.requester}`, message.author.avatarURL);
-            message.channel.sendEmbed(sSEmbed);
-            }
-
-            //ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
-            
-            queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly'}));
-
-			queue[message.guild.id].dispatcher.on('end', () => {
-                queue[message.guild.id].songs.shift();
-                play(connection, queue[message.guild.id].songs[0]);
-            });
-
-        }
-        
+            console.log(queue);
+            console.log(queue[message.guild.id].songs[0]);
+            let url2 = queue[message.guild.id].songs[0].url;
+            const streamOptions = { seek: 0, volume: 1 };
+            var voiceChannel = message.member.voiceChannel;
+            voiceChannel.join().then(connection => {
+                console.log("joined channel");
+                const stream = ytdl(url2, { filter : 'audioonly' });
+                const dispatcher = connection.playStream(stream, streamOptions);
+                dispatcher.on("end", end => {
+                    console.log("left channel");
+                    voiceChannel.leave();
+                });
+            }).catch(err => console.log(err));
+		}
     }
 }
 
