@@ -149,7 +149,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
             var voiceChannel = message.member.voiceChannel;
             voiceChannel.join().then(connection => {
                 console.log("joined channel");
-                const stream = ytdl("https://www.youtube.com/watch?v=h_aawu-dUdk", { filter : 'audioonly' });
+                const stream = ytdl("url2", { filter : 'audioonly' });
                 const dispatcher = connection.playStream(stream, streamOptions);
                 dispatcher.on("end", end => {
                     console.log("left channel");
