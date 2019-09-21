@@ -21,7 +21,7 @@ class botInfoCommand extends commando.Command
         .addField(`Library`, `discord.js-commando`, true)
         .addField(`Website`, `[neraibot.wixsite.com](https://neraibot.wixsite.com/neraibot)`, true)
         .addField(`Github`, `[NeraiBot](https://github.com/undeadevs/NeraiBot)`, true)
-        .addField(`Servers`, message.bot.guilds.size)
+        .addField(`Servers`, this.client.guilds.size)
         .addField(`Devs`, `${this.client.users.get(`${process.env.ownerID}`).tag}
         ${this.client.users.get(`${process.env.ownerID}`).tag}`, true)
         .setColor("#cc0000")
