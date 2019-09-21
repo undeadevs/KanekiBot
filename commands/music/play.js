@@ -172,7 +172,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
 
             //ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
             
-            queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly', quality: 'highestaudio'}));
+            queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly'}));
 
 			queue[message.guild.id].dispatcher.on('end', () => {
                 queue[message.guild.id].songs.shift();
