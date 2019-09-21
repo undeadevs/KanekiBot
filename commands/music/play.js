@@ -146,7 +146,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
         
         if(!message.guild.voiceConnection){message.member.voiceChannel.join().then(function(connection){
             play(message.guild.voiceConnection, queue[message.guild.id].songs[0]);
-        });}
+        });}}
 
 		async function play(connection, song) {
             console.log(song);
@@ -179,7 +179,6 @@ Please provide a value to select one of the search results ranging from 1 - 10
                 play(connection, queue[message.guild.id].songs[0]);
             });
 
-        }
         }
         
     }
