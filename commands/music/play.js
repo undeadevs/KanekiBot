@@ -174,10 +174,10 @@ Please provide a value to select one of the search results ranging from 1 - 10
             
             queue[message.guild.id].dispatcher = connection.playStream(ytdl(song.url, {filter: 'audioonly'}));
 
-			queue[message.guild.id].dispatcher.on('end', () => {
-                queue[message.guild.id].songs.shift();
-                play(connection, queue[message.guild.id].songs[0]);
-            });
+			// queue[message.guild.id].dispatcher.on('end', () => {
+            //     queue[message.guild.id].songs.shift();
+            //     play(connection, queue[message.guild.id].songs[0]);
+            // });
 
         }
         
