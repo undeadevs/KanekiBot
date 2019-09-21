@@ -21,7 +21,7 @@ class botInfoCommand extends commando.Command
         .setDescription(`
         This bot has multiple purposes.
         Library: discord.js-commando
-        Created by: ${client.users.get(`${process.env.ownerID}`).username}, and ${client.users.get(`${process.env.adminID0}`).username}
+        Created by: ${this.client.users.get(`${process.env.ownerID}`).username}, and ${this.client.users.get(`${process.env.adminID0}`).username}
         `)
         .setImage(this.client.user.avatarURL)
         .setColor("#cc0000")
