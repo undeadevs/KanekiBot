@@ -32,7 +32,6 @@
     "scrape-twitter": "^0.11.1",
     "simple-youtube-api": "^5.2.1",
     "window": "^4.2.6",
-    "ytdl-core": "^0.29.7",
     "ytdl-core-discord": "^1.0.3"
   },
   "devDependencies": {},
