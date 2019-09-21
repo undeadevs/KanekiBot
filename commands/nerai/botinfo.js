@@ -17,13 +17,13 @@ class botInfoCommand extends commando.Command
     async run(message, args)
     {
         const bEmbed = new discord.RichEmbed()
-        .setAuthor(`NeraiBot`)
-        .setDescription(`
-        This bot has multiple purposes.
-        Library: discord.js-commando
-        Created by: ${this.client.users.get(`${process.env.ownerID}`).username}, and ${this.client.users.get(`${process.env.adminID0}`).username}
-        `)
-        .setImage(this.client.user.avatarURL)
+        .setAuthor(`Nerai`, this.client.user.avatarURL)
+        .addField(`Library`, `discord.js-commando`, true)
+        .addField(`Website`, `[neraibot.wixsite.com](https://neraibot.wixsite.com/neraibot)`, true)
+        .addField(`Github`, `[NeraiBot](https://github.com/undeadevs/NeraiBot)`, true)
+        .addField(`Servers`, message.bot.guilds.size)
+        .addField(`Devs`, `${this.client.users.get(`${process.env.ownerID}`).tag}
+        ${this.client.users.get(`${process.env.ownerID}`).tag}`, true)
         .setColor("#cc0000")
         .setFooter(`requested by: ${message.author.username}`, message.author.avatarURL);
         message.channel.sendMessage(bEmbed);

@@ -1,7 +1,7 @@
 const Commando = require('discord.js-commando');
 const fs = require('fs');
 const dotenv = require('dotenv').config();
-const bot = new Commando.Client({ owner: [process.env.ownerID, process.env.adminID0, process.env.adminID1], commandPrefix: process.env.prefix, unknownCommandResponse: false });
+const bot = new Commando.Client({ owner: [process.env.ownerID, process.env.adminID0], commandPrefix: process.env.prefix, unknownCommandResponse: false });
 
 const ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
@@ -29,7 +29,7 @@ bot.on('ready', function () {
 
     bot.user.setActivity('Unravel', {type: 'LISTENING'});*/
     console.log(`[Bot is online | Node: ${process.version} | Discord.js-Commando: v${Commando.version}]\nConnected as: ${bot.user.username} (ID: ${bot.user.id})\nGuilds Connected: ${bot.guilds.size}`);
-            bot.user.setActivity(`Updated! | ${process.env.prefix}help`, { type: 'PLAYING' });
+            bot.user.setActivity(`See changelog! | ${process.env.prefix}help`, { type: 'PLAYING' });
 });
 
 global.queue = {};
