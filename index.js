@@ -12,6 +12,7 @@ const youtube = new yt(process.env.googleapikey);
 //inviteLink https://discordapp.com/oauth2/authorize?client_id=478376842248716291&scope=bot&permissions=2146958847
 
 bot.registry.registerDefaultTypes();
+bot.registry.registerGroup('nerai', 'Nerai');
 bot.registry.registerGroup('fun', 'Fun');
 bot.registry.registerGroup('music', 'Music');
 bot.registry.registerGroup('math', 'Math');
