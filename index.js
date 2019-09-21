@@ -29,7 +29,7 @@ bot.on('ready', function () {
 
     bot.user.setActivity('Unravel', {type: 'LISTENING'});*/
     console.log(`[Bot is online | Node: ${process.version} | Discord.js-Commando: v${Commando.version}]\nConnected as: ${bot.user.username} (ID: ${bot.user.id})\nGuilds Connected: ${bot.guilds.size}`);
-            bot.user.setActivity(`See changelog! | ${process.env.prefix}help`, { type: 'PLAYING' });
+            bot.user.setActivity(`${process.env.prefix}help | See changelog!`, { type: 'PLAYING' });
 });
 
 global.queue = {};
