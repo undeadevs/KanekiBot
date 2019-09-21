@@ -28,7 +28,7 @@ bot.on('ready', function () {
 
     bot.user.setActivity('Unravel', {type: 'LISTENING'});*/
     console.log(`[Bot is online | Node: ${process.version} | Discord.js-Commando: v${Commando.version}]\nConnected as: ${bot.user.username} (ID: ${bot.user.id})\nGuilds Connected: ${bot.guilds.size}`);
-            bot.user.setActivity(`${bot.guilds.size} Servers | ${process.env.prefix}help | MUSIC COMMAND IS FIXED!`, { type: 'WATCHING' });
+            bot.user.setActivity(`MUSIC COMMAND IS FIXED! | ${process.env.prefix}help`, { type: 'PLAYING' });
 });
 
 global.queue = {};
