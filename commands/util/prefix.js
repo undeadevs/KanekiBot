@@ -61,7 +61,7 @@ module.exports = class PrefixCommand extends Command {
 		} else {
 			if(msg.guild) msg.guild.commandPrefix = prefix; else this.client.commandPrefix = prefix;
 			response = prefix ? `Set the command prefix to \`${args.prefix}\`.` : 'Removed the command prefix entirely.';
-			if(!guildConf[msg.guild.id].prefix){
+			if(!guildConf[msg.guild.id]){
 				guildConf[msg.guild.id] = {
 					prefix: this.client.commandPrefix
 				}
