@@ -1,5 +1,7 @@
 const { stripIndents, oneLine } = require('common-tags');
 const Command = require('../../structures/Command');
+const fs = require('fs');
+var guildConf = require('../../guildConf.json');
 
 module.exports = class PrefixCommand extends Command {
 	constructor(client) {
@@ -59,6 +61,18 @@ module.exports = class PrefixCommand extends Command {
 		} else {
 			if(msg.guild) msg.guild.commandPrefix = prefix; else this.client.commandPrefix = prefix;
 			response = prefix ? `Set the command prefix to \`${args.prefix}\`.` : 'Removed the command prefix entirely.';
+			if(!guildConf[msg.guild.id].prefix){
+				guildConf[msg.guild.id] = {
+					prefix: this.client.commandPrefix
+				}
+			}else{
+				guildConf[msg.guild.id] = {
+					prefix: args.prefix
+				}
+			}
+			fs.writeFile('../../guildConf.json', JSON.stringify(guildConf, null, 2), err => {
+				if(err) console.log(err)
+			});
 		}
 
 		await msg.reply(`${response} To run commands, use ${msg.anyUsage('command')}.`);

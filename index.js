@@ -34,7 +34,25 @@ bot.on('ready', function () {
 
 global.queue = {};
 
-bot.msgs = require("./msgs.json");
+var guildConf = require("./guildConf.json");
+bot.on('guildCreate', function(guild){
+    if(!guildConf[guild.id]){
+        guildConf[guild.id] = {
+            prefix: bot.commandPrefix
+        }
+    }
+    fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), err => {
+        if(err) console.log(err)
+    });
+    guild.commandPrefix = guildConf[guild.id].prefix;
+});
+
+bot.on('guildDelete', function(guild){
+    delete guildConf[guild.id];
+    fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), err => {
+        if(err) console.log(err)
+    });
+});
 
 try {
     bot.on('guildMemberAdd', function (member) {
@@ -43,8 +61,8 @@ try {
 
         //this is for my server
         if (bot.isOwner(member)) {
-            let or = member.guild.roles.find("name", "owner");
-            let gc = member.guild.channels.find("name", "lobby");
+            let or = member.guild.roles.find(role => role.name === "owner");
+            let gc = member.guild.channels.find(channel => channel.name === "lobby");
             if (!gc) return;
             if (!or) {
                 return gc.send(['Welcome to the Server ' + member, rules]);
@@ -52,8 +70,8 @@ try {
             member.addRole(or);
             gc.send('Welcome to the Server my owner!!!');
         } else if (!bot.isOwner(member)) {
-            let mr = member.guild.roles.find("name", "trash");
-            let gc = member.guild.channels.find("name", "lobby");
+            let mr = member.guild.roles.find(role => role.name === "trash");
+            let gc = member.guild.channels.find(channel => channel.name === "lobby");
             if (!gc) return;
             if (!mr) {
                 return gc.send(['Welcome to the Server ' + member]);

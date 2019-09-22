@@ -23,7 +23,7 @@ class botInfoCommand extends commando.Command
         .addField(`Github`, `[NeraiBot](https://github.com/undeadevs/NeraiBot)`, true)
         .addField(`Servers`, this.client.guilds.size)
         .addField(`Devs`, `${this.client.users.get(`${process.env.ownerID}`).tag}
-        ${this.client.users.get(`${process.env.ownerID}`).tag}`, true)
+        ${this.client.users.get(`${process.env.adminID0}`).tag}`, true)
         .setColor("#cc0000")
         .setFooter(`requested by: ${message.author.username}`, message.author.avatarURL);
         message.channel.sendMessage(bEmbed);
