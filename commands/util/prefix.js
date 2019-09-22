@@ -1,7 +1,7 @@
 const { stripIndents, oneLine } = require('common-tags');
 const Command = require('../../structures/Command');
 const fs = require('fs');
-var guildConf = require('../../guildConf.json');
+var guildConf = require(`${__dirname}/../../guildConf.json`);
 
 module.exports = class PrefixCommand extends Command {
 	constructor(client) {
@@ -70,7 +70,7 @@ module.exports = class PrefixCommand extends Command {
 					prefix: args.prefix
 				}
 			}
-			fs.writeFile('../../guildConf.json', JSON.stringify(guildConf, null, 2), err => {
+			fs.writeFile(`${__dirname}/../../guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
 				if(err) console.log(err)
 			});
 		}

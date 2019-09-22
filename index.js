@@ -34,14 +34,14 @@ bot.on('ready', function () {
 
 global.queue = {};
 
-var guildConf = require("./guildConf.json");
+var guildConf = require(`${__dirname}/guildConf.json`);
 bot.on('guildCreate', function(guild){
     if(!guildConf[guild.id]){
         guildConf[guild.id] = {
             prefix: bot.commandPrefix
         }
     }
-    fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), err => {
+    fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
         if(err) console.log(err)
     });
     guild.commandPrefix = guildConf[guild.id].prefix;
@@ -49,7 +49,7 @@ bot.on('guildCreate', function(guild){
 
 bot.on('guildDelete', function(guild){
     delete guildConf[guild.id];
-    fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), err => {
+    fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
         if(err) console.log(err)
     });
 });
