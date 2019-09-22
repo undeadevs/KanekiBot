@@ -107,6 +107,8 @@ bot.on('message', function (message) {
         });
     }
 
+    console.log(guildConf);
+
     mention = message.mentions.users.first();
     msg = message.content.toLowerCase();
 
