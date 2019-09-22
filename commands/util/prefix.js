@@ -33,7 +33,7 @@ module.exports = class PrefixCommand extends Command {
 
 	async run(msg, args) {
 		// Just output the prefix
-		msg.reply(`${guildConf[msg.guild.id].prefix}`);
+		msg.reply(`${guildConf[msg.guild.id]}`);
 		if(!args.prefix) {
 			const prefix = msg.guild ? msg.guild.commandPrefix : this.client.commandPrefix;
 			return msg.reply(stripIndents`
