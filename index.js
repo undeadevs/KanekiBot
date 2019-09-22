@@ -35,6 +35,7 @@ bot.on('ready', function () {
 global.queue = {};
 
 var guildConf = require(`${__dirname}/guildConf.json`);
+
 bot.on('guildCreate', function(guild){
     if(!guildConf[guild.id]){
         guildConf[guild.id] = {
@@ -92,6 +93,20 @@ catch (error) { }
 global.test = false;
 
 bot.on('message', function (message) {
+    if(!guildConf[message.guild.id]){
+        guildConf[message.guild.id] = {
+            prefix: bot.commandPrefix
+        }
+        fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
+            if(err) console.log(err)
+        });
+    }else{
+        message.guild.commandPrefix = guildConf[message.guild.id].prefix
+        fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
+            if(err) console.log(err)
+        });
+    }
+
     mention = message.mentions.users.first();
     msg = message.content.toLowerCase();
 
