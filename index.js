@@ -1,3 +1,4 @@
+require('http').createServer().listen(3000);
 const Commando = require('discord.js-commando');
 const fs = require('fs');
 const dotenv = require('dotenv').config();

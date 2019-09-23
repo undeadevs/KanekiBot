@@ -1,0 +1,7 @@
+node_modules/
+.git/
+vids/
+
+package-lock.json
+desktop.ini
+.env
