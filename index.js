@@ -7,7 +7,7 @@ const bot = new Commando.Client({ owner: [process.env.ownerID, process.env.admin
 const ytdl = require('ytdl-core');
 const yt = require('simple-youtube-api');
 
-const youtube = new yt(process.env.googleapikey);
+const youtube = new yt(`${process.env.googleapikey}`);
 
 //clientID 478376842248716291
 //inviteLink https://discordapp.com/oauth2/authorize?client_id=478376842248716291&scope=bot&permissions=2146958847
