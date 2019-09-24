@@ -6,7 +6,7 @@ const yt = require('simple-youtube-api');
 
 const dotenv = require('dotenv').config();
 
-const youtube = new yt(`${process.env.googleapikey}`);
+const youtube = new yt(process.env.googleapikey);
 
 function TextAbstract(text, length) {
     if (text == null) {
