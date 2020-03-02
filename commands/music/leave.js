@@ -31,7 +31,6 @@ class leaveChannelCommand extends commando.Command
                 }
             }
             message.say(`Stopping songs...`);
-            message.say(queue[message.guild.id].songs.length);
             stopfunc().then(message.guild.voiceConnection.disconnect());
         }
         else
