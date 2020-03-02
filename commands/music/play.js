@@ -156,8 +156,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
 				message.member.voiceChannel.leave();
             });
 
-            if(queue[message.guild.id].leaving===true){
-            }else{
+            if(!queue[message.guild.id].leaving){
             var sSEmbed = new RichEmbed()
             .setAuthor(`Playing: ${song.title}`)
             .setDescription(`
