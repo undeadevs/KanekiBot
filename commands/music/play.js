@@ -117,6 +117,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
         async function handleVideo(vInfo){
         if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].paused = false, queue[message.guild.id].leaving = false, queue[message.guild.id].songs = [];
     
+        console.log(vInfo.id);
         var vid = {
             url: `https://www.youtube.com/watch?v=${vInfo.id}`, 
             title: vInfo.title, 
