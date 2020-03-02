@@ -30,29 +30,29 @@ bot.on('ready', function () {
 
     bot.user.setActivity('Unravel', {type: 'LISTENING'});*/
     console.log(`[Bot is online | Node: ${process.version} | Discord.js-Commando: v${Commando.version}]\nConnected as: ${bot.user.username} (ID: ${bot.user.id})\nGuilds Connected: ${bot.guilds.size}`);
-            bot.user.setActivity(`${process.env.prefix}help | See changelog!`, { type: 'PLAYING' });
+    bot.user.setActivity(`${process.env.prefix}help | See changelog!`, { type: 'PLAYING' });
 });
 
 global.queue = {};
 
 var guildConf = require(`${__dirname}/guildConf.json`);
 
-bot.on('guildCreate', function(guild){
-    if(!guildConf[guild.id]){
+bot.on('guildCreate', function (guild) {
+    if (!guildConf[guild.id]) {
         guildConf[guild.id] = {
             prefix: bot.commandPrefix
         }
     }
     fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
-        if(err) console.log(err)
+        if (err) console.log(err)
     });
     guild.commandPrefix = guildConf[guild.id].prefix;
 });
 
-bot.on('guildDelete', function(guild){
+bot.on('guildDelete', function (guild) {
     delete guildConf[guild.id];
     fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
-        if(err) console.log(err)
+        if (err) console.log(err)
     });
 });
 
@@ -94,18 +94,20 @@ catch (error) { }
 global.test = false;
 
 bot.on('message', function (message) {
-    if(!guildConf[message.guild.id]){
-        guildConf[message.guild.id] = {
-            prefix: bot.commandPrefix
+    if (message.guild!=null) {
+        if (!guildConf[message.guild.id]) {
+            guildConf[message.guild.id] = {
+                prefix: bot.commandPrefix
+            }
+            fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
+                if (err) console.log(err)
+            });
+        } else {
+            message.guild.commandPrefix = guildConf[message.guild.id].prefix
+            fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
+                if (err) console.log(err)
+            });
         }
-        fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
-            if(err) console.log(err)
-        });
-    }else{
-        message.guild.commandPrefix = guildConf[message.guild.id].prefix
-        fs.writeFile(`${__dirname}/guildConf.json`, JSON.stringify(guildConf, null, 2), err => {
-            if(err) console.log(err)
-        });
     }
 
     mention = message.mentions.users.first();
