@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "**Installation**\r `npm i`",
   "main": "index.js",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
   "dependencies": {
     "aki-api": "^2.1.1",
     "animequote": "^1.1.1",
