@@ -30,7 +30,7 @@ class malCommand extends commando.Command {
         var nums = amount;
         var max = 50;
 
-        Mal.search("anime", name).then((j) => {
+        Mal.search().anime({q: name}).then((j) => {
             let towrite = [];
             j.result.forEach(anime => {
                 towrite.push(anime.title);

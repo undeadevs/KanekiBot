@@ -29,7 +29,7 @@
     "hoek": "^5.0.4",
     "jimp": "^0.4.0",
     "lodash": "^4.17.15",
-    "node-myanimelist": "^1.1.4",
+    "node-myanimelist": "^2.0.0",
     "opusscript": "0.0.7",
     "profanities": "^2.11.0",
     "random-js": "^1.0.8",
