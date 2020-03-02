@@ -19,10 +19,7 @@ class changelogCommand extends commando.Command
         const bEmbed = new discord.RichEmbed()
         .setAuthor(`Changelog(s)`)
         .setDescription(`
-        - Fixed music(play) command
-        - Added bot info command
-        - Added changelog command
-        - Added invite command
+        - Fixed everything
         `)
         .setColor("#cc0000")
         .setFooter(`requested by: ${message.author.username}`, message.author.avatarURL);
