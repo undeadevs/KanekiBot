@@ -4,8 +4,8 @@
   "description": "**Installation**\r `npm i`",
   "main": "index.js",
   "engines": {
-    "node": ">=8.0.0",
-    "npm": ">=6.0.0"
+    "node": "8.11.3",
+    "npm": "6.4.1"
   },
   "dependencies": {
     "aki-api": "^2.1.1",
