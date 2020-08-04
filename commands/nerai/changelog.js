@@ -20,7 +20,7 @@ class changelogCommand extends commando.Command
         .setAuthor(`Changelog(s)`)
         .setDescription(`
         - Fixed mal command
-        - Twitter command no longer works
+        - Twitter command no longer working
         `)
         .setColor("#cc0000")
         .setFooter(`requested by: ${message.author.username}`, message.author.avatarURL);
