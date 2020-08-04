@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const discord = require('discord.js');
-const Mal = require("node-myanimelist");
+const {Jikan} = require("node-myanimelist");
 
 class malCommand extends commando.Command {
     constructor(client) {
@@ -30,9 +30,9 @@ class malCommand extends commando.Command {
         var nums = amount;
         var max = 50;
 
-        Mal.search().anime({q: name}).then((j) => {
+        Jikan.search().anime({q: name}).then((j) => {
             let towrite = [];
-            j.result.forEach(anime => {
+            j.results.forEach(anime => {
                 towrite.push(anime.title);
             });
 

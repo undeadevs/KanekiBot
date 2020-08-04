@@ -21,11 +21,9 @@ function TextAbstract(text, length) {
     return text + "...";
 }
 
-class playCommand extends commando.Command
-{
-    constructor(client)
-    {
-        super(client,{
+class playCommand extends commando.Command {
+    constructor(client) {
+        super(client, {
             name: 'play',
             group: 'music',
             memberName: 'play',
@@ -35,19 +33,17 @@ class playCommand extends commando.Command
             args: [
                 {
                     key: 'url',
-                    prompt:'Please provide a the title of the you want to play or a link to that video.',
+                    prompt: 'Please provide a the title of the you want to play or a link to that video.',
                     type: 'string'
                 }
             ]
         });
     }
 
-    async run(message, { url })
-    {
+    async run(message, { url }) {
 
         //users need to be in a voice channel
-        if(!message.member.voiceChannel)
-        {
+        if (!message.member.voiceChannel) {
             return message.reply("You need to join a voice channel to use this command.");
         }
 
@@ -55,26 +51,26 @@ class playCommand extends commando.Command
 
         var pls = false
 
-        try{
+        try {
             if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
                 pls = true;
                 var playlist = await youtube.getPlaylist(url);
                 var videos = await playlist.getVideos();
-			    for (var vInfo of Object.values(videos)) {
+                for (var vInfo of Object.values(videos)) {
                     var vInfo2 = await youtube.getVideoByID(vInfo.id); // eslint-disable-line no-await-in-loop
                     await handleVideo(vInfo2);
                     console.log(vInfo2);
-			    }
-			    message.say(`**${playlist.title}** has been added to the queue.`);
-            }else{
-                var vInfo = await youtube.getVideo( url );
+                }
+                message.say(`**${playlist.title}** has been added to the queue.`);
+            } else {
+                var vInfo = await youtube.getVideo(url);
                 await handleVideo(vInfo);
             }
         }
-        catch(error){
-            try{
+        catch (error) {
+            try {
                 // message.awaitMessages()
-                var vSearch = await youtube.searchVideos(url,10);
+                var vSearch = await youtube.searchVideos(url, 10);
                 let index = 0;
                 var searchEmbed = new RichEmbed()
                     .setTitle(`__**Songs Selection:**__`)
@@ -83,7 +79,7 @@ class playCommand extends commando.Command
 ${vSearch.map(video2 => `${++index}. ${video2.title}`).join(`\n`)}\`\`\`
 Please provide a value to select one of the search results ranging from 1 - 10
 `);
-message.say(searchEmbed);
+                message.say(searchEmbed);
                 /*message.channel.send(`
 __**Songs Selection:**__
 \`\`\`${vSearch.map(video2 => `${++index}. ${video2.title}`).join(`\n`)}\`\`\`
@@ -96,16 +92,16 @@ Please provide a value to select one of the search results ranging from 1 - 10
                         errors: ['time']
                     });
                 }
-                catch (e){
+                catch (e) {
                     console.error(e);
                     return message.say('No or invalid value entered, cancelling video selection.');
                 }
 
                 const videoIndex = parseInt(response.first().content);
-                var vInfo = await youtube.getVideoByID( vSearch[videoIndex-1].id );
+                var vInfo = await youtube.getVideoByID(vSearch[videoIndex - 1].id);
                 await handleVideo(vInfo);
             }
-            catch(err){
+            catch (err) {
                 message.say(`i couldn't obtain any search result.`);
             }
         }
@@ -114,72 +110,76 @@ Please provide a value to select one of the search results ranging from 1 - 10
         //console.log(video);
         //var vInfo = await ytdl.getInfo( url );
 
-        async function handleVideo(vInfo){
-        if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].paused = false, queue[message.guild.id].leaving = false, queue[message.guild.id].songs = [];
+        async function handleVideo(vInfo) {
+            if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].paused = false, queue[message.guild.id].leaving = false, queue[message.guild.id].songs = [];
 
-        var vid = {
-            url: `https://www.youtube.com/watch?v=${vInfo.id}`, 
-            title: vInfo.title, 
-            img: vInfo.thumbnails.high.url, 
-            channel: vInfo.channel.title, 
-            desc: vInfo.description, 
-            requester: message.author.username};
+            var vid = {
+                url: `https://www.youtube.com/watch?v=${vInfo.id}`,
+                title: vInfo.title,
+                img: vInfo.thumbnails.high.url,
+                channel: vInfo.channel.title,
+                desc: vInfo.description,
+                requester: message.author.username
+            };
 
-        queue[message.guild.id].songs.push(vid);
-        if(pls===true) {return runPlay();}
-        
-        else {
-        let qpos = [];
+            queue[message.guild.id].songs.push(vid);
+            if (pls === true) { return runPlay(); }
 
-        queue[message.guild.id].songs.forEach((song, i) => { qpos.push(`${i+1}`);});
-        qpos = String(qpos);
-        const qp = qpos.split(",");
-        message.channel.sendMessage(`**${vid.title}** has been added to the queue position **${qp[qp.length-1]}**.`).then(runPlay());//wait until the song added to the queue and then play the songs
-        }
+            else {
+                let qpos = [];
+
+                queue[message.guild.id].songs.forEach((song, i) => { qpos.push(`${i + 1}`); });
+                qpos = String(qpos);
+                const qp = qpos.split(",");
+                message.channel.sendMessage(`**${vid.title}** has been added to the queue position **${qp[qp.length - 1]}**.`).then(runPlay());//wait until the song added to the queue and then play the songs
+            }
         }
 
         //function that play the songs
-        async function runPlay(){
-		queue[message.guild.id].playing = true;
+        async function runPlay() {
+            queue[message.guild.id].playing = true;
 
-        console.log(queue);
-        
-        if(!message.guild.voiceConnection){message.member.voiceChannel.join().then(function(connection){
-            play(message.guild.voiceConnection, queue[message.guild.id].songs[0]);
-        });}}
+            console.log(queue);
 
-		async function play(connection, song) {
+            if (!message.guild.voiceConnection) {
+                message.member.voiceChannel.join().then(
+                    play(message.guild.voiceConnection, queue[message.guild.id].songs[0])
+                );
+            }
+        }
+
+        async function play(connection, song) {
             console.log(song);
 
-			if (song === undefined) return message.channel.sendMessage('Queue finished.').then(() => {
-				queue[message.guild.id].playing = false;
-				message.member.voiceChannel.leave();
+            if (song === undefined) return message.channel.sendMessage('Queue finished.').then(() => {
+                queue[message.guild.id].playing = false;
+                message.member.voiceChannel.leave();
             });
 
-            if(!queue[message.guild.id].leaving){
-            var sSEmbed = new RichEmbed()
-            .setAuthor(`Playing: ${song.title}`)
-            .setDescription(`
+            if (!queue[message.guild.id].leaving) {
+                var sSEmbed = new RichEmbed()
+                    .setAuthor(`Playing: ${song.title}`)
+                    .setDescription(`
 **Link:** ${song.url}
 **Channel**: ${song.channel}`
-)
-            .setImage(song.img)
-            .setColor("#cc0000")
-            .setFooter(`requested by: ${song.requester}`, message.author.avatarURL);
-            message.channel.sendEmbed(sSEmbed);
+                    )
+                    .setImage(song.img)
+                    .setColor("#cc0000")
+                    .setFooter(`requested by: ${song.requester}`, message.author.avatarURL);
+                message.channel.sendEmbed(sSEmbed);
             }
 
             //ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
-            
+
             queue[message.guild.id].dispatcher = connection.playOpusStream(await ytdl(song.url));
 
-			queue[message.guild.id].dispatcher.on('end', () => {
+            queue[message.guild.id].dispatcher.on('end', () => {
                 queue[message.guild.id].songs.shift();
                 play(connection, queue[message.guild.id].songs[0]);
             });
 
         }
-        
+
     }
 }
 

@@ -24,6 +24,7 @@ class twitterCommand extends commando.Command
 
     async run(message, { user })
     {
+        if(1==1) return message.say(`Unfortunately this command is no longer working.`);
         async function a() {
             try{
             var userInfo = await sTwitter.getUserProfile(user);

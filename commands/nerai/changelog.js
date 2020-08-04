@@ -19,7 +19,8 @@ class changelogCommand extends commando.Command
         const bEmbed = new discord.RichEmbed()
         .setAuthor(`Changelog(s)`)
         .setDescription(`
-        - Fixed everything
+        - Fixed mal command
+        - Twitter command no longer works
         `)
         .setColor("#cc0000")
         .setFooter(`requested by: ${message.author.username}`, message.author.avatarURL);
