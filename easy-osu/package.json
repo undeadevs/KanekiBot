@@ -1,0 +1,59 @@
+{
+  "_args": [
+    [
+      "easy-osu@1.0.7",
+      "D:\\testbot"
+    ]
+  ],
+  "_from": "easy-osu@1.0.7",
+  "_id": "easy-osu@1.0.7",
+  "_inBundle": false,
+  "_integrity": "sha512-m9K4TZT1mWisa+REFUqbns5vWeElnfm9/p7gvJkK1DpsC5nAP8Tq6It7gf9+A1CqORNw20zb1DZJ0ncJJdG3tg==",
+  "_location": "/easy-osu",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "easy-osu@1.0.7",
+    "name": "easy-osu",
+    "escapedName": "easy-osu",
+    "rawSpec": "1.0.7",
+    "saveSpec": null,
+    "fetchSpec": "1.0.7"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/easy-osu/-/easy-osu-1.0.7.tgz",
+  "_spec": "1.0.7",
+  "_where": "D:\\testbot",
+  "author": {
+    "name": "StavZ",
+    "email": "randy10220@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/oni-project/easy-osu/issues"
+  },
+  "dependencies": {
+    "superagent": "^5.0.5"
+  },
+  "description": "Easy osu! Wraper for your Discord Bot\nAll ",
+  "homepage": "https://github.com/oni-project/easy-osu#readme",
+  "keywords": [
+    "osu!",
+    "discord",
+    "easy",
+    "wraper",
+    "js",
+    "api"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "easy-osu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oni-project/easy-osu.git"
+  },
+  "scripts": {},
+  "version": "1.0.7"
+}

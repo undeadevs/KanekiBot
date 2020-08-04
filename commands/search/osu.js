@@ -3,7 +3,7 @@ const discord = require('discord.js');
 
 const dotenv = require('dotenv').config();
 
-const OsuApiClient = require('easy-osu');
+const OsuApiClient = require('../../easy-osu/index');
 const osu = new OsuApiClient.Api(process.env.osuapikey, {
     resAsError: true // Reject on not found instead of returning nothing. (default: true)
 });
