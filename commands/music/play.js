@@ -143,7 +143,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
 
             if (!message.guild.voiceConnection) {
                 message.member.voiceChannel.join().then(
-                    play(message.guild.voiceConnection, queue[message.guild.id].songs[0])
+                    await play(message.guild.voiceConnection, queue[message.guild.id].songs[0])
                 );
             }
         }
@@ -171,7 +171,7 @@ Please provide a value to select one of the search results ranging from 1 - 10
 
             //ytdl(song.url, {quality: 'highest'}).pipe(fs.createWriteStream((`./vids/${vInfo.id}.mp4`)));
 
-            queue[message.guild.id].dispatcher = connection.playOpusStream(await ytdl(song.url));
+            queue[message.guild.id].dispatcher = await connection.playOpusStream(await ytdl(song.url));
 
             queue[message.guild.id].dispatcher.on('end', () => {
                 queue[message.guild.id].songs.shift();
